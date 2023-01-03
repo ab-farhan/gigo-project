@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Jan 01, 2023 at 10:52 AM
--- Server version: 5.7.34
--- PHP Version: 7.4.21
+-- Host: localhost:3306
+-- Generation Time: Jan 03, 2023 at 04:46 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `coursemat`
+-- Database: `gigo`
 --
 
 -- --------------------------------------------------------
@@ -28,25 +28,25 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admins` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `role_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `role_id` int DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '0 - deactive, 1 - active',
+  `status` tinyint NOT NULL DEFAULT '1' COMMENT '0 - deactive, 1 - active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`id`, `role_id`, `username`, `email`, `first_name`, `last_name`, `image`, `password`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'admin', 'admin@example.com', 'Johny', 'Barristow', '5f5797dbc520b.png', '$2y$10$UmZ3nP0JIUOI0CxLG/175efcigYJDbfg45Ga4cYz/YdZOshZ0GPMm', 1, NULL, '2020-09-08 08:40:27');
+(1, NULL, 'admin', 'admin@example.com', 'Johny', 'Barristow', '5f5797dbc520b.png', '$2a$12$QNjEUiKnxRvIuVoU42ejZuiZkpuxeS5WQ9V8OjK9Wyzv7fCErYaOq', 1, NULL, '2020-09-08 08:40:27');
 
 -- --------------------------------------------------------
 
@@ -55,13 +55,13 @@ INSERT INTO `admins` (`id`, `role_id`, `username`, `email`, `first_name`, `last_
 --
 
 CREATE TABLE `advertisements` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `ad_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `resolution_type` smallint(5) UNSIGNED NOT NULL COMMENT '1 => 300 x 250, 2 => 300 x 600, 3 => 728 x 90',
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `slot` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `views` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `id` bigint UNSIGNED NOT NULL,
+  `ad_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `resolution_type` smallint UNSIGNED NOT NULL COMMENT '1 => 300 x 250, 2 => 300 x 600, 3 => 728 x 90',
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slot` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `views` int UNSIGNED NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -88,9 +88,9 @@ INSERT INTO `advertisements` (`id`, `ad_type`, `resolution_type`, `image`, `url`
 --
 
 CREATE TABLE `basic_extendeds` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `cookie_alert_status` tinyint(4) NOT NULL DEFAULT '1',
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int DEFAULT NULL,
+  `cookie_alert_status` tinyint NOT NULL DEFAULT '1',
   `cookie_alert_text` blob,
   `cookie_alert_button_text` varchar(255) DEFAULT NULL,
   `to_mail` varchar(255) DEFAULT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `basic_extendeds` (
   `from_mail` varchar(255) DEFAULT NULL,
   `testimonial_img` varchar(255) DEFAULT NULL,
   `from_name` varchar(255) DEFAULT NULL,
-  `is_smtp` tinyint(4) NOT NULL DEFAULT '0',
+  `is_smtp` tinyint NOT NULL DEFAULT '0',
   `smtp_host` varchar(255) DEFAULT NULL,
   `smtp_port` varchar(30) DEFAULT NULL,
   `encryption` varchar(30) DEFAULT NULL,
@@ -119,27 +119,27 @@ CREATE TABLE `basic_extendeds` (
   `contact_addresses` text,
   `contact_numbers` text,
   `contact_mails` text,
-  `is_whatsapp` tinyint(4) NOT NULL DEFAULT '1',
+  `is_whatsapp` tinyint NOT NULL DEFAULT '1',
   `whatsapp_number` varchar(50) DEFAULT NULL,
   `whatsapp_header_title` varchar(255) DEFAULT NULL,
   `whatsapp_popup_message` text,
-  `whatsapp_popup` tinyint(4) NOT NULL DEFAULT '1',
+  `whatsapp_popup` tinyint NOT NULL DEFAULT '1',
   `domain_request_success_message` varchar(255) DEFAULT NULL,
   `cname_record_section_title` varchar(255) DEFAULT NULL,
   `cname_record_section_text` text,
   `package_features` text,
-  `expiration_reminder` int(11) NOT NULL DEFAULT '3',
+  `expiration_reminder` int NOT NULL DEFAULT '3',
   `max_video_size` decimal(11,2) NOT NULL DEFAULT '20.00',
   `max_file_size` decimal(11,2) NOT NULL DEFAULT '10.00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `basic_extendeds`
 --
 
 INSERT INTO `basic_extendeds` (`id`, `language_id`, `cookie_alert_status`, `cookie_alert_text`, `cookie_alert_button_text`, `to_mail`, `default_language_direction`, `from_mail`, `testimonial_img`, `from_name`, `is_smtp`, `smtp_host`, `smtp_port`, `encryption`, `smtp_username`, `smtp_password`, `base_currency_symbol`, `base_currency_symbol_position`, `base_currency_text`, `base_currency_text_position`, `base_currency_rate`, `hero_section_title`, `hero_section_text`, `hero_section_button_text`, `hero_section_button_url`, `hero_section_video_url`, `hero_img`, `timezone`, `contact_addresses`, `contact_numbers`, `contact_mails`, `is_whatsapp`, `whatsapp_number`, `whatsapp_header_title`, `whatsapp_popup_message`, `whatsapp_popup`, `domain_request_success_message`, `cname_record_section_title`, `cname_record_section_text`, `package_features`, `expiration_reminder`, `max_video_size`, `max_file_size`) VALUES
-(147, 176, 1, 0x596f757220657870657269656e6365206f6e207468697320736974652077696c6c20626520696d70726f76656420627920616c6c6f77696e6720636f6f6b6965732e, 'Allow Cookies', 'geniustest11@gmail.com', 'ltr', NULL, '1656494874.png', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0x24, 'left', 'USD', 'right', '1.00', 'Our Platform, Your Success', 'Create Your Course Website', 'Explore Plans', 'https://coursmat.xyz/pricing', 'https://www.youtube.com/watch?v=6stlCkUDG_s', '62d6a05f18fa6.png', 'America/Maceio', 'California, USA\r\nLondon, United Kingdom\r\nMelbourne, Australia', '+8434197502,+2350575099,+23576039607', 'contact@example.com,support@example.com,query@example.com', 1, NULL, NULL, NULL, 1, 'We have received your custom domain request. Please allow us 2 business days to connect the domain with our server.', 'Read Before Sending Custom Domain Request', '<ul><li><font color=\"#575962\"><span style=\"font-weight:600;\">Before sending request for your custom domain, You need to add CNAME records (given in below table) in your custom domain from your domain registrar account (like - namecheap, godaddy etc...).</span></font></li><li><font color=\"#575962\"><span style=\"font-weight:600;\">&nbsp;CNAME records are needed to point your custom domain to our domain ( sassotest.xyz ), so that our website can show your website on your custom domain</span></font></li><li><font color=\"#575962\"><span style=\"font-weight:600;\">&nbsp;Different domain registrar (like - godaddy, namecheap etc...) has different interface for adding CNAME records. If you cannot find the place to add CNAME record in your domain registrar account, then please contact your domain registrar support, they will show you the place to add CNAME record for your custom domain. They can also help you with adding CNAME record for you.</span></font></li></ul><p><span style=\"font-weight:600;color:rgb(87,89,98);\">Add CNAME records (take data from below table) in your custom domain from your domain registrar panel:</span></p><table class=\"table table-bordered\" style=\"width:726px;\"><tbody><tr><td>Type</td><td>Host</td><td>Value</td><td>TTL</td></tr><tr><td>CNAME Record</td><td>www</td><td>sassotest.xyz.</td><td>Automatic</td></tr><tr><td>CNAME Record</td><td>@</td><td>sassotest.xyz.</td><td>Automatic</td></tr></tbody></table><p><span style=\"color:rgb(87,89,98);\"><span style=\"font-weight:600;\">Screenshots for Example Purpose:</span><br></span><img src=\"https://coursemat.test:8890/assets/front/img/summernote/62ea8c9ebea35.png\" style=\"width:100%;\" alt=\"62ea8c9ebea35.png\"><span style=\"color:rgb(87,89,98);\"><br></span></p>', '[\"Custom Domain\",\"Subdomain\",\"Course Completion Certificate\",\"Coupon\",\"Amazon AWS s3\",\"Storage Limit\",\"vCard\",\"QR Builder\",\"Follow\\/Unfollow\",\"Blog\",\"Advertisement\",\"Custom Page\"]', 3, '40.00', '5.00'),
-(148, 177, 1, 0xd8b3d98ad8aad98520d8aad8add8b3d98ad98620d8aad8acd8b1d8a8d8aad98320d8b9d984d98920d987d8b0d8a720d8a7d984d985d988d982d8b920d985d98620d8aed984d8a7d98420d8a7d984d8b3d985d8a7d8ad20d8a8d985d984d981d8a7d8aa20d8aad8b9d8b1d98ad98120d8a7d984d8a7d8b1d8aad8a8d8a7d8b7, 'السماح للكوكيز', 'geniustest11@gmail.com', 'ltr', NULL, '1656494874.png', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0x24, 'left', 'USD', 'right', '1.00', 'منصتنا ، نجاحك', 'إنشاء موقع الدورة التدريبية الخاصة بك', 'اكتشف الخطط', 'https://coursmat.xyz/pricing', 'https://www.youtube.com/watch?v=6stlCkUDG_s', '62bd7ba737ba0.png', 'America/Maceio', 'منزل - 44 ، طريق - 03 ، قطاع - 11 ، أوتارا ، دكا\r\nدهانوندي ، دكا\r\nمحمدبور ، دكا', '237237237,72372332,+8967936437', 'contact@example.com,support@example.com,query@example.com', 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, '[\"Custom Domain\",\"Subdomain\",\"Course Completion Certificate\",\"Coupon\",\"Amazon AWS s3\",\"Storage Limit\",\"vCard\",\"QR Builder\",\"Follow\\/Unfollow\",\"Blog\",\"Advertisement\",\"Custom Page\"]', 3, '40.00', '5.00');
+(147, 176, 1, 0x596f757220657870657269656e6365206f6e207468697320736974652077696c6c20626520696d70726f76656420627920616c6c6f77696e6720636f6f6b6965732e, 'Allow Cookies', 'geniustest11@gmail.com', 'ltr', NULL, '1672649555.png', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0x24, 'left', 'USD', 'right', '1.00', 'No #01 Digital Services Website', 'Digital Services Website With Click', 'Build Your Website', 'https://coursmat.xyz/pricing', 'https://www.youtube.com/watch?v=6stlCkUDG_s', '63b2710d2ac28.png', 'America/Maceio', 'California, USA\r\nLondon, United Kingdom\r\nMelbourne, Australia', '+8434197502,+2350575099,+23576039607', 'contact@example.com,support@example.com,query@example.com', 1, NULL, NULL, NULL, 1, 'We have received your custom domain request. Please allow us 2 business days to connect the domain with our server.', 'Read Before Sending Custom Domain Request', '<ul><li><font color=\"#575962\"><span style=\"font-weight:600;\">Before sending request for your custom domain, You need to add CNAME records (given in below table) in your custom domain from your domain registrar account (like - namecheap, godaddy etc...).</span></font></li><li><font color=\"#575962\"><span style=\"font-weight:600;\">&nbsp;CNAME records are needed to point your custom domain to our domain ( sassotest.xyz ), so that our website can show your website on your custom domain</span></font></li><li><font color=\"#575962\"><span style=\"font-weight:600;\">&nbsp;Different domain registrar (like - godaddy, namecheap etc...) has different interface for adding CNAME records. If you cannot find the place to add CNAME record in your domain registrar account, then please contact your domain registrar support, they will show you the place to add CNAME record for your custom domain. They can also help you with adding CNAME record for you.</span></font></li></ul><p><span style=\"font-weight:600;color:rgb(87,89,98);\">Add CNAME records (take data from below table) in your custom domain from your domain registrar panel:</span></p><table class=\"table table-bordered\" style=\"width:726px;\"><tbody><tr><td>Type</td><td>Host</td><td>Value</td><td>TTL</td></tr><tr><td>CNAME Record</td><td>www</td><td>sassotest.xyz.</td><td>Automatic</td></tr><tr><td>CNAME Record</td><td>@</td><td>sassotest.xyz.</td><td>Automatic</td></tr></tbody></table><p><span style=\"color:rgb(87,89,98);\"><span style=\"font-weight:600;\">Screenshots for Example Purpose:</span><br></span><img src=\"https://coursemat.test:8890/assets/front/img/summernote/62ea8c9ebea35.png\" style=\"width:100%;\" alt=\"62ea8c9ebea35.png\"><span style=\"color:rgb(87,89,98);\"><br></span></p>', '[\"Custom Domain\",\"Subdomain\",\"Course Completion Certificate\",\"Coupon\",\"Amazon AWS s3\",\"Storage Limit\",\"vCard\",\"QR Builder\",\"Follow\\/Unfollow\",\"Blog\",\"Advertisement\",\"Custom Page\"]', 3, '40.00', '5.00'),
+(148, 177, 1, 0xd8b3d98ad8aad98520d8aad8add8b3d98ad98620d8aad8acd8b1d8a8d8aad98320d8b9d984d98920d987d8b0d8a720d8a7d984d985d988d982d8b920d985d98620d8aed984d8a7d98420d8a7d984d8b3d985d8a7d8ad20d8a8d985d984d981d8a7d8aa20d8aad8b9d8b1d98ad98120d8a7d984d8a7d8b1d8aad8a8d8a7d8b7, 'السماح للكوكيز', 'geniustest11@gmail.com', 'ltr', NULL, '1672649555.png', NULL, 0, NULL, NULL, NULL, NULL, NULL, 0x24, 'left', 'USD', 'right', '1.00', 'منصتنا ، نجاحك', 'إنشاء موقع الدورة التدريبية الخاصة بك', 'اكتشف الخطط', 'https://coursmat.xyz/pricing', 'https://www.youtube.com/watch?v=6stlCkUDG_s', '62bd7ba737ba0.png', 'America/Maceio', 'منزل - 44 ، طريق - 03 ، قطاع - 11 ، أوتارا ، دكا\r\nدهانوندي ، دكا\r\nمحمدبور ، دكا', '237237237,72372332,+8967936437', 'contact@example.com,support@example.com,query@example.com', 1, NULL, NULL, NULL, 1, NULL, NULL, NULL, '[\"Custom Domain\",\"Subdomain\",\"Course Completion Certificate\",\"Coupon\",\"Amazon AWS s3\",\"Storage Limit\",\"vCard\",\"QR Builder\",\"Follow\\/Unfollow\",\"Blog\",\"Advertisement\",\"Custom Page\"]', 3, '40.00', '5.00');
 
 -- --------------------------------------------------------
 
@@ -148,11 +148,11 @@ INSERT INTO `basic_extendeds` (`id`, `language_id`, `cookie_alert_status`, `cook
 --
 
 CREATE TABLE `basic_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int DEFAULT NULL,
   `favicon` varchar(50) DEFAULT NULL,
   `logo` varchar(50) DEFAULT NULL,
-  `preloader_status` tinyint(4) NOT NULL DEFAULT '1',
+  `preloader_status` tinyint NOT NULL DEFAULT '1',
   `preloader` varchar(50) DEFAULT NULL,
   `website_title` varchar(255) DEFAULT NULL,
   `base_color` varchar(30) DEFAULT NULL,
@@ -170,33 +170,33 @@ CREATE TABLE `basic_settings` (
   `contact_text` varchar(255) DEFAULT NULL,
   `contact_info_title` varchar(191) DEFAULT NULL,
   `tawk_to_script` text,
-  `is_recaptcha` tinyint(4) NOT NULL DEFAULT '0',
+  `is_recaptcha` tinyint NOT NULL DEFAULT '0',
   `google_recaptcha_site_key` varchar(255) DEFAULT NULL,
   `google_recaptcha_secret_key` varchar(255) DEFAULT NULL,
-  `is_tawkto` tinyint(4) NOT NULL DEFAULT '1',
+  `is_tawkto` tinyint NOT NULL DEFAULT '1',
   `tawkto_property_id` varchar(255) DEFAULT NULL,
   `tawkto_chat_link` varchar(255) DEFAULT NULL,
-  `is_disqus` tinyint(4) NOT NULL DEFAULT '1',
-  `is_user_disqus` tinyint(4) NOT NULL DEFAULT '1',
+  `is_disqus` tinyint NOT NULL DEFAULT '1',
+  `is_user_disqus` tinyint NOT NULL DEFAULT '1',
   `disqus_shortname` varchar(255) DEFAULT NULL,
   `disqus_script` text,
-  `maintainance_mode` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1 - active, 0 - deactive',
+  `maintainance_mode` tinyint NOT NULL DEFAULT '0' COMMENT '1 - active, 0 - deactive',
   `maintainance_text` text,
   `maintenance_img` varchar(50) DEFAULT NULL,
-  `maintenance_status` tinyint(4) NOT NULL DEFAULT '0',
+  `maintenance_status` tinyint NOT NULL DEFAULT '0',
   `secret_path` varchar(255) DEFAULT NULL,
-  `home_section` tinyint(4) NOT NULL DEFAULT '1',
-  `process_section` tinyint(4) NOT NULL DEFAULT '1',
-  `featured_users_section` tinyint(4) NOT NULL DEFAULT '1',
-  `pricing_section` tinyint(4) NOT NULL DEFAULT '1',
-  `partners_section` tinyint(4) NOT NULL DEFAULT '1',
+  `home_section` tinyint NOT NULL DEFAULT '1',
+  `process_section` tinyint NOT NULL DEFAULT '1',
+  `featured_users_section` tinyint NOT NULL DEFAULT '1',
+  `pricing_section` tinyint NOT NULL DEFAULT '1',
+  `partners_section` tinyint NOT NULL DEFAULT '1',
   `partner_title` varchar(255) DEFAULT NULL,
   `partner_subtitle` varchar(255) DEFAULT NULL,
-  `intro_section` tinyint(4) NOT NULL DEFAULT '1',
+  `intro_section` tinyint NOT NULL DEFAULT '1',
   `intro_section_button_text` varchar(255) DEFAULT NULL,
   `intro_section_button_url` varchar(255) DEFAULT NULL,
   `intro_section_video_url` varchar(255) DEFAULT NULL,
-  `testimonial_section` tinyint(4) NOT NULL DEFAULT '1',
+  `testimonial_section` tinyint NOT NULL DEFAULT '1',
   `feature_title` varchar(255) DEFAULT NULL,
   `work_process_title` varchar(255) DEFAULT NULL,
   `work_process_subtitle` varchar(255) DEFAULT NULL,
@@ -208,29 +208,29 @@ CREATE TABLE `basic_settings` (
   `pricing_subtitle` varchar(255) DEFAULT NULL,
   `testimonial_title` varchar(255) DEFAULT NULL,
   `testimonial_subtitle` varchar(255) DEFAULT NULL,
-  `news_section` tinyint(4) NOT NULL DEFAULT '1',
-  `template_section` tinyint(4) NOT NULL DEFAULT '1',
-  `top_footer_section` tinyint(4) NOT NULL DEFAULT '1',
-  `copyright_section` tinyint(4) NOT NULL DEFAULT '1',
+  `news_section` tinyint NOT NULL DEFAULT '1',
+  `template_section` tinyint NOT NULL DEFAULT '1',
+  `top_footer_section` tinyint NOT NULL DEFAULT '1',
+  `copyright_section` tinyint NOT NULL DEFAULT '1',
   `blog_title` varchar(255) DEFAULT NULL,
   `blog_subtitle` varchar(255) DEFAULT NULL,
   `useful_links_title` varchar(50) DEFAULT NULL,
   `newsletter_title` varchar(50) DEFAULT NULL,
   `newsletter_subtitle` varchar(255) DEFAULT NULL,
-  `is_whatsapp` tinyint(4) NOT NULL DEFAULT '1',
+  `is_whatsapp` tinyint NOT NULL DEFAULT '1',
   `whatsapp_number` varchar(50) DEFAULT NULL,
   `whatsapp_header_title` varchar(255) DEFAULT NULL,
   `whatsapp_popup_message` text,
-  `whatsapp_popup` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `whatsapp_popup` tinyint NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `basic_settings`
 --
 
 INSERT INTO `basic_settings` (`id`, `language_id`, `favicon`, `logo`, `preloader_status`, `preloader`, `website_title`, `base_color`, `base_color2`, `breadcrumb`, `footer_logo`, `footer_text`, `newsletter_text`, `copyright_text`, `intro_subtitle`, `intro_title`, `intro_text`, `intro_main_image`, `contact_form_title`, `contact_text`, `contact_info_title`, `tawk_to_script`, `is_recaptcha`, `google_recaptcha_site_key`, `google_recaptcha_secret_key`, `is_tawkto`, `tawkto_property_id`, `tawkto_chat_link`, `is_disqus`, `is_user_disqus`, `disqus_shortname`, `disqus_script`, `maintainance_mode`, `maintainance_text`, `maintenance_img`, `maintenance_status`, `secret_path`, `home_section`, `process_section`, `featured_users_section`, `pricing_section`, `partners_section`, `partner_title`, `partner_subtitle`, `intro_section`, `intro_section_button_text`, `intro_section_button_url`, `intro_section_video_url`, `testimonial_section`, `feature_title`, `work_process_title`, `work_process_subtitle`, `preview_templates_title`, `preview_templates_subtitle`, `featured_users_title`, `featured_users_subtitle`, `pricing_title`, `pricing_subtitle`, `testimonial_title`, `testimonial_subtitle`, `news_section`, `template_section`, `top_footer_section`, `copyright_section`, `blog_title`, `blog_subtitle`, `useful_links_title`, `newsletter_title`, `newsletter_subtitle`, `is_whatsapp`, `whatsapp_number`, `whatsapp_header_title`, `whatsapp_popup_message`, `whatsapp_popup`) VALUES
-(153, 176, '62e8ed247669d.png', '62dfd4ebf3564.png', 1, '62e000f7a79e2.png', 'CourseMat', '197A83', '5CC2AD', '62d50cae8e4fe.jpeg', '62dfd6eb961ba.png', 'We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.', 'Subscribe to gate Latest News, Offer and connect With Us.', 0x436f7079726967687420c2a920323032322e20416c6c2072696768747320726573657276656420627920436f757273656d61742e, 'Bring More Profit With More Features', 'About Us', 'It is a long established fact that a reader will be choose by the readable content of a page when looking at its layout.\n\nWe completed 500+ client’s projects\nWe have 10+ multiple developer\n100+ active client’s working with us\nYour trusted business partner', '62b2b131e6f12.png', 'Leave Reply', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum.', 'Contact Info', '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5f5e445f4704467e89ee918d/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->', 0, '6Lf9jOQUAAAAABJKj_nQBNvji7wh4DdOZIPAdRKk', '6Lf9jOQUAAAAALO4C5pC7O_HHw0Z1BuYCU_FA606', 0, '60b886bbde99a4282a1b22a3', 'https://tawk.to/chat/62d688ec7b967b11799a42ee/1g8b0do1h', 1, 1, 'plusagency-2-5', '<script>\r\n\r\n/**\r\n*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\r\n*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/\r\n/*\r\nvar disqus_config = function () {\r\nthis.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\r\nthis.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\r\n};\r\n*/\r\n(function() { // DON\'T EDIT BELOW THIS LINE\r\nvar d = document, s = d.createElement(\'script\');\r\ns.src = \'https://plusagency.disqus.com/embed.js\';\r\ns.setAttribute(\'data-timestamp\', +new Date());\r\n(d.head || d.body).appendChild(s);\r\n})();\r\n</script>', 0, 'We are upgrading our site. We will come back soon. \r\nPlease stay with us.\r\nThank you....', '62c010a8266f6.png', 0, NULL, 1, 1, 1, 1, 1, 'Our Great Achievement Proved Us!', 'We Completed 500+ Projects With Clint\'s Satisfaction', 1, 'Know More', 'http://www.coursmat.xyz/p/about-us', 'https://www.youtube.com/watch?v=K4TOrB7at0Y', 1, 'Features', 'Make Education Website', 'Work Process', 'Available Templates', 'See Our Awesome Templates', 'Featured Websites', 'Take a Look at The Featured Course Websites', 'Pricing Plans', 'Choose Your Perfect Option', 'Our Happy Client’s', 'What Our Cliets Say', 1, 1, 1, 1, 'Blogs', 'Our Latest Blogs', 'Useful Links', 'Newsletter', 'Get latest updates first', 1, '2367327069', 'Hi, There!', 'Hello,\nWelcome to Coursemat!\nHow may I help you ?', 1),
-(154, 177, '62e8ed247669d.png', '62dfd4ebf3564.png', 1, '62e000f7a79e2.png', 'CourseMat', '197A83', '5CC2AD', '62d50cae8e4fe.jpeg', '62dfd6f389b61.png', 'نحن شركة متعددة الأطراف فائزة بشكل كبير. نحن نؤمن بالجودة والمعايير التي نأخذها بعين الاعتبار.', 'Subscribe to gate Latest News, Offer and connect With Us.', 0xd8acd985d98ad8b920d8a7d984d8add982d988d98220d985d8add981d988d8b8d8a920c2a920323032322e, 'قصتنا', 'لدينا 20 عاما من الخبرة العملية في مقهى.', 'هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام', '6195e994095b0.png', 'اترك الرد', 'هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل', 'معلومات الاتصال', '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5f5e445f4704467e89ee918d/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->', 0, '6Lf9jOQUAAAAABJKj_nQBNvji7wh4DdOZIPAdRKk', '6Lf9jOQUAAAAALO4C5pC7O_HHw0Z1BuYCU_FA606', 0, '60b886bbde99a4282a1b22a3', 'https://tawk.to/chat/62d688ec7b967b11799a42ee/1g8b0do1h', 1, 1, 'plusagency-2-5', '<script>\r\n\r\n/**\r\n*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\r\n*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/\r\n/*\r\nvar disqus_config = function () {\r\nthis.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\r\nthis.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\r\n};\r\n*/\r\n(function() { // DON\'T EDIT BELOW THIS LINE\r\nvar d = document, s = d.createElement(\'script\');\r\ns.src = \'https://plusagency.disqus.com/embed.js\';\r\ns.setAttribute(\'data-timestamp\', +new Date());\r\n(d.head || d.body).appendChild(s);\r\n})();\r\n</script>', 0, 'We are upgrading our site. We will come back soon. \r\nPlease stay with us.\r\nThank you....', NULL, 0, NULL, 1, 1, 1, 1, 1, 'لقد أثبت لنا إنجازنا العظيم!', 'لقد أكملنا أكثر من +500 مشروع برضا كلينت', 1, NULL, NULL, NULL, 1, 'متميز', 'آلية العمل', 'آلية العمل', 'تصميم إبداعي وسهل الاستخدام', 'انظر نموذج التعليم الخاص بنا', 'مستخدم مميز', 'مستخدم مميز', 'التسعير', 'التسعير', 'شهادة', 'شهادة', 1, 1, 1, 1, 'المدونات', 'أحدث مدوناتنا', 'روابط مفيدة', 'النشرة الإخبارية', 'احصل على آخر التحديثات أولاً', 1, '2367327069', 'Hi, There!', 'Hello,\nWelcome to Coursemat!\nHow may I help you ?', 1);
+(153, 176, '63b2646a5004e.png', '63b264324fca7.png', 1, '62e000f7a79e2.png', 'Gigo', '2667FF', '5CC2AD', '62d50cae8e4fe.jpeg', '62dfd6eb961ba.png', 'We are a awward winning multinaitonal Company. We Believe quality and standard worlwidex Consider.', 'Subscribe to gate Latest News, Offer and connect With Us.', 0x436f7079726967687420c2a920323032322e20416c6c2072696768747320726573657276656420627920436f757273656d61742e, 'Bring More Profits With More Features', 'Why You Choose Our Template', 'It is a long established fact that a reader will be choose by the readable content of a page when looking at.\r\n\r\nWe completed 500+ client’s projects\r\nWe have 10+ multiple developer\r\n100+ active client’s working with us\r\nYour trusted business partner', '62b2b131e6f12.png', 'Leave Reply', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum.', 'Contact Info', '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5f5e445f4704467e89ee918d/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->', 0, '6Lf9jOQUAAAAABJKj_nQBNvji7wh4DdOZIPAdRKk', '6Lf9jOQUAAAAALO4C5pC7O_HHw0Z1BuYCU_FA606', 0, '60b886bbde99a4282a1b22a3', 'https://tawk.to/chat/62d688ec7b967b11799a42ee/1g8b0do1h', 1, 1, 'plusagency-2-5', '<script>\r\n\r\n/**\r\n*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\r\n*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/\r\n/*\r\nvar disqus_config = function () {\r\nthis.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\r\nthis.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\r\n};\r\n*/\r\n(function() { // DON\'T EDIT BELOW THIS LINE\r\nvar d = document, s = d.createElement(\'script\');\r\ns.src = \'https://plusagency.disqus.com/embed.js\';\r\ns.setAttribute(\'data-timestamp\', +new Date());\r\n(d.head || d.body).appendChild(s);\r\n})();\r\n</script>', 0, 'We are upgrading our site. We will come back soon. \r\nPlease stay with us.\r\nThank you....', '62c010a8266f6.png', 0, NULL, 1, 1, 1, 1, 1, 'Our Great Achievement Proved Us!', 'We Completed 500+ Projects With Clint\'s Satisfaction', 1, 'Know More', 'http://www.coursmat.xyz/p/about-us', 'https://www.youtube.com/watch?v=K4TOrB7at0Y', 1, 'Features', 'How To Setup Website', 'Work Process', 'Creative & User Friendly Design', 'See Our Modern Template', 'Our Featured Users', 'Take a Look at The Featured Users', 'Build Your Relationship With Us', 'Choose Our Pricing Plan', 'Our Client’s Testimonial', NULL, 1, 1, 1, 1, 'Our Latest Blogs', NULL, 'Useful Links', 'Newsletter', 'Get latest updates first', 1, '2367327069', 'Hi, There!', 'Hello,\nWelcome to Coursemat!\nHow may I help you ?', 1),
+(154, 177, '63b2646a5004e.png', '63b264324fca7.png', 1, '62e000f7a79e2.png', 'Gigo', '2667FF', '5CC2AD', '62d50cae8e4fe.jpeg', '62dfd6f389b61.png', 'نحن شركة متعددة الأطراف فائزة بشكل كبير. نحن نؤمن بالجودة والمعايير التي نأخذها بعين الاعتبار.', 'Subscribe to gate Latest News, Offer and connect With Us.', 0xd8acd985d98ad8b920d8a7d984d8add982d988d98220d985d8add981d988d8b8d8a920c2a920323032322e, 'قصتنا', 'لدينا 20 عاما من الخبرة العملية في مقهى.', 'هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام', '6195e994095b0.png', 'اترك الرد', 'هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل', 'معلومات الاتصال', '<!--Start of Tawk.to Script-->\r\n<script type=\"text/javascript\">\r\nvar Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\r\n(function(){\r\nvar s1=document.createElement(\"script\"),s0=document.getElementsByTagName(\"script\")[0];\r\ns1.async=true;\r\ns1.src=\'https://embed.tawk.to/5f5e445f4704467e89ee918d/default\';\r\ns1.charset=\'UTF-8\';\r\ns1.setAttribute(\'crossorigin\',\'*\');\r\ns0.parentNode.insertBefore(s1,s0);\r\n})();\r\n</script>\r\n<!--End of Tawk.to Script-->', 0, '6Lf9jOQUAAAAABJKj_nQBNvji7wh4DdOZIPAdRKk', '6Lf9jOQUAAAAALO4C5pC7O_HHw0Z1BuYCU_FA606', 0, '60b886bbde99a4282a1b22a3', 'https://tawk.to/chat/62d688ec7b967b11799a42ee/1g8b0do1h', 1, 1, 'plusagency-2-5', '<script>\r\n\r\n/**\r\n*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.\r\n*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/\r\n/*\r\nvar disqus_config = function () {\r\nthis.page.url = PAGE_URL;  // Replace PAGE_URL with your page\'s canonical URL variable\r\nthis.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page\'s unique identifier variable\r\n};\r\n*/\r\n(function() { // DON\'T EDIT BELOW THIS LINE\r\nvar d = document, s = d.createElement(\'script\');\r\ns.src = \'https://plusagency.disqus.com/embed.js\';\r\ns.setAttribute(\'data-timestamp\', +new Date());\r\n(d.head || d.body).appendChild(s);\r\n})();\r\n</script>', 0, 'We are upgrading our site. We will come back soon. \r\nPlease stay with us.\r\nThank you....', NULL, 0, NULL, 1, 1, 1, 1, 1, 'لقد أثبت لنا إنجازنا العظيم!', 'لقد أكملنا أكثر من +500 مشروع برضا كلينت', 1, NULL, NULL, NULL, 1, 'متميز', 'آلية العمل', 'آلية العمل', 'تصميم إبداعي وسهل الاستخدام', 'انظر نموذج التعليم الخاص بنا', 'مستخدم مميز', 'مستخدم مميز', 'التسعير', 'التسعير', 'شهادة', 'شهادة', 1, 1, 1, 1, 'المدونات', 'أحدث مدوناتنا', 'روابط مفيدة', 'النشرة الإخبارية', 'احصل على آخر التحديثات أولاً', 1, '2367327069', 'Hi, There!', 'Hello,\nWelcome to Coursemat!\nHow may I help you ?', 1);
 
 -- --------------------------------------------------------
 
@@ -239,13 +239,13 @@ INSERT INTO `basic_settings` (`id`, `language_id`, `favicon`, `logo`, `preloader
 --
 
 CREATE TABLE `bcategories` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT '0',
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  `serial_number` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` tinyint NOT NULL DEFAULT '1',
+  `serial_number` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `bcategories`
@@ -268,9 +268,9 @@ INSERT INTO `bcategories` (`id`, `language_id`, `name`, `slug`, `status`, `seria
 --
 
 CREATE TABLE `blogs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT '0',
-  `bcategory_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int NOT NULL DEFAULT '0',
+  `bcategory_id` int DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `main_image` varchar(255) DEFAULT NULL,
@@ -278,10 +278,10 @@ CREATE TABLE `blogs` (
   `tags` text,
   `meta_keywords` text,
   `meta_description` text,
-  `serial_number` int(11) NOT NULL DEFAULT '0',
+  `serial_number` int NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `blogs`
@@ -308,15 +308,15 @@ INSERT INTO `blogs` (`id`, `language_id`, `bcategory_id`, `title`, `slug`, `main
 --
 
 CREATE TABLE `cookie_alerts` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `cookie_alert_status` tinyint(3) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int NOT NULL,
+  `cookie_alert_status` tinyint UNSIGNED NOT NULL,
   `cookie_alert_btn_text` varchar(255) NOT NULL,
   `cookie_alert_text` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `cookie_alerts`
@@ -333,18 +333,18 @@ INSERT INTO `cookie_alerts` (`id`, `language_id`, `user_id`, `cookie_alert_statu
 --
 
 CREATE TABLE `coupons` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `value` decimal(11,2) DEFAULT NULL,
-  `start_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `end_date` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `packages` text COLLATE utf8mb4_unicode_ci,
+  `start_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `end_date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `packages` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `maximum_uses_limit` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `total_uses` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `maximum_uses_limit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_uses` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -362,8 +362,8 @@ INSERT INTO `coupons` (`id`, `name`, `code`, `type`, `value`, `start_date`, `end
 --
 
 CREATE TABLE `customers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
@@ -376,13 +376,13 @@ CREATE TABLE `customers` (
   `city` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
-  `status` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '0 -> banned or deactive, 1 -> active',
+  `status` tinyint UNSIGNED NOT NULL DEFAULT '0' COMMENT '0 -> banned or deactive, 1 -> active',
   `verification_token` varchar(255) DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
-  `edit_profile_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '0 -> not edited user profile, 1 -> edited user profile',
+  `edit_profile_status` tinyint UNSIGNED NOT NULL DEFAULT '0' COMMENT '0 -> not edited user profile, 1 -> edited user profile',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `customers`
@@ -399,11 +399,11 @@ INSERT INTO `customers` (`id`, `user_id`, `first_name`, `last_name`, `image`, `u
 --
 
 CREATE TABLE `email_templates` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `email_type` varchar(100) DEFAULT NULL,
   `email_subject` text,
   `email_body` longtext
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `email_templates`
@@ -437,13 +437,13 @@ INSERT INTO `email_templates` (`id`, `email_type`, `email_subject`, `email_body`
 --
 
 CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `connection` text NOT NULL,
   `queue` text NOT NULL,
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -452,12 +452,12 @@ CREATE TABLE `failed_jobs` (
 --
 
 CREATE TABLE `faqs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT '0',
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int NOT NULL DEFAULT '0',
   `question` varchar(255) DEFAULT NULL,
   `answer` text,
-  `serial_number` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `serial_number` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `faqs`
@@ -482,13 +482,13 @@ INSERT INTO `faqs` (`id`, `language_id`, `question`, `answer`, `serial_number`) 
 --
 
 CREATE TABLE `features` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT '0',
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int NOT NULL DEFAULT '0',
   `icon` varchar(255) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
   `text` varchar(255) DEFAULT NULL,
-  `serial_number` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `serial_number` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `features`
@@ -511,12 +511,12 @@ INSERT INTO `features` (`id`, `language_id`, `icon`, `title`, `text`, `serial_nu
 --
 
 CREATE TABLE `followers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `follower_id` int(11) NOT NULL,
-  `following_id` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `follower_id` int NOT NULL,
+  `following_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -525,15 +525,15 @@ CREATE TABLE `followers` (
 --
 
 CREATE TABLE `instructor_social_links` (
-  `id` int(11) NOT NULL,
-  `instructor_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `instructor_id` int NOT NULL,
+  `user_id` int NOT NULL,
   `icon` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `serial_number` int(11) NOT NULL,
+  `serial_number` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `instructor_social_links`
@@ -620,14 +620,14 @@ INSERT INTO `instructor_social_links` (`id`, `instructor_id`, `user_id`, `icon`,
 --
 
 CREATE TABLE `jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `queue` varchar(255) NOT NULL,
   `payload` longtext NOT NULL,
-  `attempts` tinyint(3) UNSIGNED NOT NULL,
-  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
-  `available_at` int(10) UNSIGNED NOT NULL,
-  `created_at` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `attempts` tinyint UNSIGNED NOT NULL,
+  `reserved_at` int UNSIGNED DEFAULT NULL,
+  `available_at` int UNSIGNED NOT NULL,
+  `created_at` int UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -636,14 +636,14 @@ CREATE TABLE `jobs` (
 --
 
 CREATE TABLE `languages` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
-  `is_default` tinyint(4) NOT NULL DEFAULT '1',
-  `rtl` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 - LTR, 1- RTL',
+  `is_default` tinyint NOT NULL DEFAULT '1',
+  `rtl` tinyint NOT NULL DEFAULT '0' COMMENT '0 - LTR, 1- RTL',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `languages`
@@ -660,7 +660,7 @@ INSERT INTO `languages` (`id`, `name`, `code`, `is_default`, `rtl`, `created_at`
 --
 
 CREATE TABLE `memberships` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `package_price` double NOT NULL DEFAULT '0',
   `discount` double NOT NULL DEFAULT '0',
   `coupon_code` varchar(255) DEFAULT NULL,
@@ -671,18 +671,18 @@ CREATE TABLE `memberships` (
   `transaction_id` varchar(255) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `is_trial` tinyint(1) NOT NULL DEFAULT '0',
-  `trial_days` int(11) NOT NULL DEFAULT '0',
+  `trial_days` int NOT NULL DEFAULT '0',
   `receipt` longtext,
   `transaction_details` longtext,
   `settings` longtext,
-  `package_id` int(11) NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `package_id` int NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
   `start_date` date DEFAULT NULL,
   `expire_date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `modified` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `modified` tinyint NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `memberships`
@@ -718,20 +718,20 @@ INSERT INTO `memberships` (`id`, `package_price`, `discount`, `coupon_code`, `pr
 --
 
 CREATE TABLE `menus` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int DEFAULT NULL,
   `menus` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `menus`
 --
 
 INSERT INTO `menus` (`id`, `language_id`, `menus`, `created_at`, `updated_at`) VALUES
-(139, 176, '[{\"text\":\"Home\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"home\"},{\"text\":\"Listings\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"listings\"},{\"text\":\"Pricing\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"pricing\"},{\"text\":\"Pages\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"About Us\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"10\"},{\"text\":\"Terms & Conditions\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"11\"}]},{\"text\":\"Blog\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"blog\"},{\"text\":\"FAQs\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"faq\"},{\"text\":\"Contact\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"contact\"}]', '2022-07-14 01:44:06', '2022-07-14 01:44:06'),
-(140, 177, '[{\"text\":\"منزل\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"home\"},{\"text\":\"القوائم\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"listings\"},{\"text\":\"التسعير\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"pricing\"},{\"text\":\"الصفحات\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"معلومات عنا\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"12\"},{\"text\":\"البنود و الظروف\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"13\"}]},{\"type\":\"blog\",\"text\":\"مدونة او مذكرة\",\"href\":\"\",\"target\":\"_self\"},{\"text\":\"أسئلة وأجوبة\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"faq\"},{\"text\":\"اتصال\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"contact\"}]', '2022-07-21 03:01:39', '2022-07-21 03:01:39');
+(140, 177, '[{\"text\":\"منزل\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"home\"},{\"text\":\"القوائم\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"listings\"},{\"text\":\"التسعير\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"pricing\"},{\"text\":\"الصفحات\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"معلومات عنا\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"12\"},{\"text\":\"البنود و الظروف\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"13\"}]},{\"type\":\"blog\",\"text\":\"مدونة او مذكرة\",\"href\":\"\",\"target\":\"_self\"},{\"text\":\"أسئلة وأجوبة\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"faq\"},{\"text\":\"اتصال\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"contact\"}]', '2022-07-21 03:01:39', '2022-07-21 03:01:39'),
+(153, 176, '[{\"text\":\"Home\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"home\"},{\"text\":\"Profile\",\"href\":\"profile\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\"},{\"text\":\"Pricing\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"pricing\"},{\"text\":\"Pages\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"custom\",\"children\":[{\"text\":\"About Us\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"10\"},{\"text\":\"Terms & Conditions\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"11\"}]},{\"text\":\"Blog\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"blog\"},{\"text\":\"Contact\",\"href\":\"\",\"icon\":\"empty\",\"target\":\"_self\",\"title\":\"\",\"type\":\"contact\"}]', '2023-01-01 19:59:22', '2023-01-01 19:59:22');
 
 -- --------------------------------------------------------
 
@@ -740,17 +740,17 @@ INSERT INTO `menus` (`id`, `language_id`, `menus`, `created_at`, `updated_at`) V
 --
 
 CREATE TABLE `offline_gateways` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `short_description` text,
   `instructions` blob,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  `serial_number` int(11) NOT NULL DEFAULT '0',
-  `is_receipt` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint NOT NULL DEFAULT '1',
+  `serial_number` int NOT NULL DEFAULT '0',
+  `is_receipt` tinyint NOT NULL DEFAULT '1',
   `receipt` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `offline_gateways`
@@ -767,29 +767,29 @@ INSERT INTO `offline_gateways` (`id`, `name`, `short_description`, `instructions
 --
 
 CREATE TABLE `packages` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `price` double NOT NULL DEFAULT '0',
   `term` varchar(255) DEFAULT NULL,
   `featured` enum('0','1') NOT NULL DEFAULT '0',
   `is_trial` enum('0','1') NOT NULL DEFAULT '0',
-  `trial_days` int(11) DEFAULT NULL,
+  `trial_days` int DEFAULT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '1',
   `recommended` enum('0','1') NOT NULL DEFAULT '0',
   `icon` varchar(255) DEFAULT NULL,
-  `storage_limit` int(11) DEFAULT '999999',
-  `course_categories_limit` int(11) NOT NULL DEFAULT '0',
-  `featured_course_limit` int(11) NOT NULL DEFAULT '0',
-  `course_limit` int(11) NOT NULL DEFAULT '0',
-  `module_limit` int(11) NOT NULL DEFAULT '0',
-  `lesson_limit` int(11) NOT NULL DEFAULT '0',
+  `storage_limit` int DEFAULT '999999',
+  `course_categories_limit` int NOT NULL DEFAULT '0',
+  `featured_course_limit` int NOT NULL DEFAULT '0',
+  `course_limit` int NOT NULL DEFAULT '0',
+  `module_limit` int NOT NULL DEFAULT '0',
+  `lesson_limit` int NOT NULL DEFAULT '0',
   `features` text,
   `meta_keywords` longtext,
   `meta_description` longtext,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `packages`
@@ -813,25 +813,25 @@ INSERT INTO `packages` (`id`, `title`, `slug`, `price`, `term`, `featured`, `is_
 --
 
 CREATE TABLE `pages` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT '0',
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
   `body` blob,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint NOT NULL DEFAULT '1',
   `meta_keywords` text,
   `meta_description` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `pages`
 --
 
 INSERT INTO `pages` (`id`, `language_id`, `name`, `title`, `slug`, `body`, `status`, `meta_keywords`, `meta_description`, `created_at`, `updated_at`) VALUES
-(10, 176, 'About Us', 'About Us', 'about-us', 0x3c70207374796c653d22746578742d616c69676e3a6c6566743b223e3c7370616e207374796c653d22666f6e742d66616d696c793a56657264616e613b746578742d616c69676e3a6a7573746966793b223e4275742049206d757374206578706c61696e20746f20796f7520686f7720616c6c2074686973206d697374616b656e2069646561206f662064656e6f756e63696e6720706c65617375726520616e64207072616973696e67207061696e2077617320626f726e20616e6420492077696c6c206769766520796f75206120636f6d706c657465206163636f756e74206f66207468652073797374656d2c20616e64206578706f756e64207468652061637475616c207465616368696e6773206f6620746865206772656174206578706c6f726572206f66207468652074727574682c20746865206d61737465722d6275696c646572206f662068756d616e2068617070696e6573732e204e6f206f6e652072656a656374732c206469736c696b65732c206f722061766f69647320706c65617375726520697473656c662c206265636175736520697420697320706c6561737572652c2062757420626563617573652074686f73652077686f20646f206e6f74206b6e6f7720686f7720746f2070757273756520706c65617375726520726174696f6e616c6c7920656e636f756e74657220636f6e73657175656e6365732074686174206172652065787472656d656c79207061696e66756c2e203c2f7370616e3e3c2f703e3c756c3e3c6c69207374796c653d22746578742d616c69676e3a6c6566743b223e3c7370616e207374796c653d22666f6e742d66616d696c793a56657264616e613b746578742d616c69676e3a6a7573746966793b223e4e6f7220616761696e20697320746865726520616e796f6e652077686f206c6f766573206f722070757273756573206f72206465736972657320746f206f627461696e207061696e206f6620697473656c662c2062656361757365206974206973207061696e2c206275742062656361757365206f63636173696f6e616c6c792063697263756d7374616e636573206f6363757220696e20776869636820746f696c20616e64207061696e2063616e2070726f637572652068696d20736f6d6520677265617420706c6561737572652e20546f2074616b652061207472697669616c206578616d706c652c207768696368206f66207573206576657220756e64657274616b6573206c61626f72696f757320706879736963616c2065786572636973652c2065786365707420746f206f627461696e20736f6d6520616476616e746167652066726f6d2069743f204275742077686f2068617320616e7920726967687420746f2066696e64206661756c7420776974682061206d616e2077686f2063686f6f73657320746f20656e6a6f79206120706c656173757265207468617420686173206e6f20616e6e6f79696e6720636f6e73657175656e6365732c206f72206f6e652077686f2061766f6964732061207061696e20746861742070726f6475636573206e6f20726573756c74616e7420706c6561737572653c2f7370616e3e3c2f6c693e3c2f756c3e3c756c3e3c6c69207374796c653d22746578742d616c69676e3a6c6566743b223e3c7370616e207374796c653d22666f6e742d66616d696c793a56657264616e613b746578742d616c69676e3a6a7573746966793b223e4275742049206d757374206578706c61696e20746f20796f7520686f7720616c6c2074686973206d697374616b656e2069646561206f662064656e6f756e63696e6720706c65617375726520616e64207072616973696e67207061696e2077617320626f726e20616e6420492077696c6c206769766520796f75206120636f6d706c657465206163636f756e74206f66207468652073797374656d2c20616e64206578706f756e64207468652061637475616c207465616368696e6773206f6620746865206772656174206578706c6f726572206f66207468652074727574682c20746865206d61737465722d6275696c646572206f662068756d616e2068617070696e6573732e204e6f206f6e652072656a656374732c206469736c696b65732c206f722061766f69647320706c65617375726520697473656c662c206265636175736520697420697320706c6561737572652c2062757420626563617573652074686f73652077686f20646f206e6f74206b6e6f7720686f7720746f2070757273756520706c65617375726520726174696f6e616c6c7920656e636f756e74657220636f6e73657175656e6365732074686174206172652065787472656d656c79207061696e66756c2e3c2f7370616e3e3c2f6c693e3c2f756c3e3c70207374796c653d22746578742d616c69676e3a6c6566743b223e3c7370616e207374796c653d22666f6e742d66616d696c793a56657264616e613b746578742d616c69676e3a6a7573746966793b223e3c6272202f3e3c2f7370616e3e3c2f703e3c646976207374796c653d22746578742d616c69676e3a6c6566743b223e3c7370616e207374796c653d22666f6e742d66616d696c793a56657264616e613b746578742d616c69676e3a6a7573746966793b223ec2a04e6f7220616761696e20697320746865726520616e796f6e652077686f206c6f766573206f722070757273756573206f72206465736972657320746f206f627461696e207061696e206f6620697473656c662c2062656361757365206974206973207061696e2c206275742062656361757365206f63636173696f6e616c6c792063697263756d7374616e636573206f6363757220696e20776869636820746f696c20616e64207061696e2063616e2070726f637572652068696d20736f6d6520677265617420706c6561737572652e20546f2074616b652061207472697669616c206578616d706c652c207768696368206f66207573206576657220756e64657274616b6573206c61626f72696f757320706879736963616c2065786572636973652c2065786365707420746f206f627461696e20736f6d6520616476616e746167652066726f6d2069743f204275742077686f2068617320616e7920726967687420746f2066696e64206661756c7420776974682061206d616e2077686f2063686f6f73657320746f20656e6a6f79206120706c656173757265207468617420686173206e6f20616e6e6f79696e6720636f6e73657175656e6365732c206f72206f6e652077686f2061766f6964732061207061696e20746861742070726f6475636573206e6f20726573756c74616e7420706c6561737572653c2f7370616e3e3c2f6469763e3c7370616e207374796c653d22746578742d616c69676e3a6a7573746966793b223e3c2f7370616e3e3c646976207374796c653d22746578742d616c69676e3a6a7573746966793b223e3c6272202f3e3c2f6469763e, 1, NULL, NULL, '2021-07-25 01:22:57', '2022-07-06 02:50:58'),
+(10, 176, 'About Us', 'About Us', 'about-us', 0x3c6834207374796c653d226c696e652d6865696768743a312e323b666f6e742d73697a653a323470783b223e312e20496e666f726d6174696f6e20436f6c6c656374696f6e3c2f68343e3c70207374796c653d22636f6c6f723a726762283131362c3131362c313136293b6c696e652d6865696768743a312e383b666f6e742d66616d696c793a506f7070696e732c2073616e732d73657269663b666f6e742d73697a653a313670783b223e4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e73656374657475722061646970697363696e6720656c69742c2073656420646f20656975736d6f642074656d706f7220696e6369646964756e742075742061626f726520657420646f6c6f7265206d61676e6120616c697175612e20557420656e696d206164206d696e696d2076656e69616d2c2071756973206e6f737472756420657865726369746174696f6e20756c6c616d636f206c61626f726973206e69736920757420616c697175697020657820656120636f6d206d6f646f20636f6e7365717561742e2044756973206175746520697275726520646f6c6f7220696e20726570726568656e646572697420696e20766f6c7570746174652076656c697420657373652063696c6c756d20646f6c6f7265206675676961742e3c2f703e3c70207374796c653d22636f6c6f723a726762283131362c3131362c313136293b6c696e652d6865696768743a312e383b666f6e742d66616d696c793a506f7070696e732c2073616e732d73657269663b666f6e742d73697a653a313670783b223e4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e73656374657475722061646970697363696e6720656c69742c2073656420646f20656975736d6f642074656d706f7220696e6369646964756e742075742061626f726520657420646f6c6f7265206d61676e6120616c697175612e20557420656e696d206164206d696e696d2076656e69616d2c2071756973206e6f737472756420657865726369746174696f6e20756c6c616d636f206c61626f726973206e69736920757420616c69717569703c2f703e3c70207374796c653d22636f6c6f723a726762283131362c3131362c313136293b6c696e652d6865696768743a312e383b666f6e742d66616d696c793a506f7070696e732c2073616e732d73657269663b666f6e742d73697a653a313670783b223e4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e73656374657475722061646970697363696e6720656c69742c2073656420646f20656975736d6f642074656d706f7220696e6369646964756e742075742061626f726520657420646f6c6f7265206d61676e6120616c697175612e20557420656e696d206164206d696e696d2076656e69616d2c2071756973206e6f737472756420657865726369746174696f6e20756c6c616d636f206c61626f726973206e69736920757420616c69717569703c2f703e3c646976207374796c653d22746578742d616c69676e3a6a7573746966793b223e3c6272202f3e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a6a7573746966793b223e3c6272202f3e3c2f6469763e3c646976207374796c653d22746578742d616c69676e3a6a7573746966793b223e3c6834207374796c653d226c696e652d6865696768743a312e323b666f6e742d73697a653a323470783b223e322e2047656e6572616c20496e666f726d6174696f6e3c2f68343e3c70207374796c653d22636f6c6f723a726762283131362c3131362c313136293b6c696e652d6865696768743a312e383b666f6e742d66616d696c793a506f7070696e732c2073616e732d73657269663b666f6e742d73697a653a313670783b223e4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e73656374657475722061646970697363696e6720656c69742c2073656420646f20656975736d6f642074656d706f7220696e6369646964756e742075742061626f726520657420646f6c6f7265206d61676e6120616c697175612e20557420656e696d206164206d696e696d2076656e69616d2c2071756973206e6f737472756420657865726369746174696f6e20756c6c616d636f206c61626f726973206e69736920757420616c697175697020657820656120636f6d206d6f646f20636f6e7365717561742e2044756973206175746520697275726520646f6c6f7220696e20726570726568656e646572697420696e20766f6c7570746174652076656c697420657373652063696c6c756d20646f6c6f7265206675676961742e3c2f703e3c70207374796c653d22636f6c6f723a726762283131362c3131362c313136293b6c696e652d6865696768743a312e383b666f6e742d66616d696c793a506f7070696e732c2073616e732d73657269663b666f6e742d73697a653a313670783b223e4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e73656374657475722061646970697363696e6720656c69742c2073656420646f20656975736d6f642074656d706f7220696e6369646964756e742075742061626f726520657420646f6c6f7265206d61676e6120616c697175612e20557420656e696d206164206d696e696d2076656e69616d2c2071756973206e6f737472756420657865726369746174696f6e20756c6c616d636f206c61626f726973206e69736920757420616c69717569703c2f703e3c70207374796c653d22636f6c6f723a726762283131362c3131362c313136293b6c696e652d6865696768743a312e383b666f6e742d66616d696c793a506f7070696e732c2073616e732d73657269663b666f6e742d73697a653a313670783b223e4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e73656374657475722061646970697363696e6720656c69742c2073656420646f20656975736d6f642074656d706f7220696e6369646964756e742075742061626f726520657420646f6c6f7265206d61676e6120616c697175612e20557420656e696d206164206d696e696d2076656e69616d2c2071756973206e6f737472756420657865726369746174696f6e20756c6c616d636f206c61626f726973206e69736920757420616c697175697020657820656120636f6d206d6f646f20636f6e7365717561742e2044756973206175746520697275726520646f6c6f7220696e20726570726568656e646572697420696e20766f6c7570746174652076656c697420657373652063696c6c756d20646f6c6f7265206675676961742e3c2f703e3c70207374796c653d22636f6c6f723a726762283131362c3131362c313136293b6c696e652d6865696768743a312e383b666f6e742d66616d696c793a506f7070696e732c2073616e732d73657269663b666f6e742d73697a653a313670783b223e4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e73656374657475722061646970697363696e6720656c69742c2073656420646f20656975736d6f642074656d706f7220696e6369646964756e742075742061626f726520657420646f6c6f7265206d61676e6120616c697175612e20557420656e696d206164206d696e696d2076656e69616d2c2071756973206e6f737472756420657865726369746174696f6e20756c6c616d636f206c61626f726973206e69736920757420616c69717569703c2f703e3c756c3e3c6c693e497420686173207375727669766564206e6f74206f6e6c7920666976652063656e7475726965732c2062757420616c736f20746865206c65617020696e746f20656c656374726f6e6963207479706573657474696e672e3c2f6c693e3c6c693e436f6e747261727920746f20706f70756c61722062656c6965662c204c6f72656d20497073756d206973206e6f742073696d706c792072616e646f6d20746578742e3c2f6c693e3c6c693e54686520706f696e74206f66207573696e67204c6f72656d20497073756d2069732074686174206974206861732061206d6f72652d6f722d6c657373206e6f726d616c20646973747269627574696f6e206f66206c6574746572732e3c2f6c693e3c6c693e566172696f75732076657273696f6e7320686176652065766f6c766564206f766572207468652079656172732c20736f6d6574696d6573206279206163636964656e7420736f6d6574696d65732e3c2f6c693e3c2f756c3e3c2f6469763e, 1, NULL, NULL, '2021-07-25 01:22:57', '2023-01-01 20:09:17'),
 (11, 176, 'Terms & Conditions', 'Terms & Conditions', 'terms-&-conditions', 0x3c68323e3c7370616e207374796c653d22666f6e742d73697a653a323470783b223e5465726d732026616d703b20436f6e646974696f6e733a3c2f7370616e3e3c2f68323e3c756c3e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e4c6f72656d20697073756d20646f6c6f722073697420616d65742c20636f6e7365637465747565722061646970697363696e6720656c69742e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e416c697175616d2074696e636964756e74206d61757269732065752072697375732e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e566573746962756c756d20617563746f722064617069627573206e657175652e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e4e756e63206469676e697373696d207269737573206964206d657475732e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e43726173206f726e6172652074726973746971756520656c69742e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e566976616d757320766573746962756c756d206e74756c6c61206e656320616e74652e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e5072616573656e7420706c61636572617420726973757320717569732065726f732e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e46757363652070656c6c656e746573717565207375736369706974206e6962682e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e496e7465676572207669746165206c696265726f206163207269737573206567657374617320706c6163657261742e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e566573746962756c756d20636f6d6d6f646f2066656c6973207175697320746f72746f722e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e557420616c697175616d20736f6c6c696369747564696e206c656f2e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e4372617320696163756c697320756c74726963696573206e756c6c612e3c2f7370616e3e3c2f6c693e3c6c69207374796c653d226c696e652d6865696768743a333b223e3c7370616e207374796c653d22666f6e742d73697a653a313870783b223e446f6e656320717569732064756920617420646f6c6f722074656d706f7220696e74657264756d3c2f7370616e3e3c2f6c693e3c2f756c3e, 1, NULL, NULL, '2021-07-25 01:25:50', '2022-07-01 20:16:48'),
 (12, 177, 'معلومات عنا', 'معلومات عنا', 'معلومات-عنا', 0x3c703e3c696d67207372633d22687474703a2f2f6c6f63616c686f73742f736173736f2f6173736574732f66726f6e742f696d672f73756d6d65726e6f74652f363066653533646438363934312e6a706722207374796c653d2277696474683a313030253b2220616c743d22363066653533646438363934312e6a706722202f3e3c7370616e3e3c6272202f3e3c2f7370616e3e3c2f703e3c703e3c7370616e3ed988d984d983d98620d98ad8acd8a820d8a3d98620d8a3d8b4d8b1d8ad20d984d98320d983d98ad98120d983d98420d987d8b0d98720d8a7d984d981d983d8b1d8a920d8a7d984d8aed8a7d8b7d8a6d8a920d984d984d8aad986d8afd98ad8af20d984d982d8af20d988d984d8afd8aa20d8a7d984d984d8b0d8a920d988d8a7d984d8abd986d8a7d8a120d88c20d988d8b3d8a3d982d8afd98520d984d98320d988d8b5d981d98bd8a720d983d8a7d985d984d8a7d98b20d984d984d986d8b8d8a7d98520d88c20d988d8a3d8b4d8b1d8ad20d8a7d984d8aad8b9d8a7d984d98ad98520d8a7d984d981d8b9d984d98ad8a920d984d984d985d8b3d8aad983d8b4d98120d8a7d984d8b9d8b8d98ad98520d984d984d8add982d98ad982d8a920d88c20d8a7d984d8a8d8a7d986d98a20d8a7d984d8b1d8a6d98ad8b3d98a20d984d984d8b3d8b9d8a7d8afd8a920d8a7d984d8a8d8b4d8b1d98ad8a92e20d984d8a720d8a3d8add8af20d98ad8b1d981d8b620d8a3d98820d98ad983d8b1d98720d8a3d98820d98ad8aad8acd986d8a820d8a7d984d985d8aad8b9d8a920d986d981d8b3d987d8a720d88c20d984d8a3d986d987d8a720d985d8aad8b9d8a920d88c20d988d984d983d98620d984d8a3d98620d8a3d988d984d8a6d98320d8a7d984d8b0d98ad98620d984d8a720d98ad8b9d8b1d981d988d98620d983d98ad981d98ad8a920d8a7d984d8b3d8b9d98a20d988d8b1d8a7d8a120d8a7d984d985d8aad8b9d8a920d98ad988d8a7d8acd987d988d98620d8b9d988d8a7d982d8a820d985d8a4d984d985d8a920d984d984d8bad8a7d98ad8a92e20d988d984d8a720d98ad988d8acd8af20d8a3d98ad8b6d98bd8a720d8a3d98a20d8b4d8aed8b520d98ad8add8a820d8a3d98820d98ad8b3d8b9d98920d8a3d98820d98ad8b1d8bad8a820d981d98a20d8a7d984d8add8b5d988d98420d8b9d984d98920d8a7d984d8a3d984d98520d985d98620d986d981d8b3d98720d88c20d984d8a3d986d98720d8a3d984d98520d88c20d988d984d983d98620d984d8a3d986d98720d98ad8add8afd8ab20d8a3d8add98ad8a7d986d98bd8a720d8b8d8b1d988d98120d98ad985d983d98620d8a3d98620d98ad985d986d8add98720d981d98ad987d8a720d8a7d984d983d8afd8ad20d988d8a7d984d8a3d984d98520d8a8d8b9d8b620d8a7d984d985d8aad8b9d8a920d8a7d984d8b9d8b8d98ad985d8a92e20d984d986d8a3d8aed8b020d985d8abd8a7d984d8a720d8aad8a7d981d987d8a720d88c20d8a3d98a20d985d986d8a720d98ad982d988d98520d8a8d8aad985d8a7d8b1d98ad98620d8a8d8afd986d98ad8a920d8b4d8a7d982d8a920d88c20d8a5d984d8a720d984d984d8add8b5d988d98420d8b9d984d98920d8a8d8b9d8b620d8a7d984d985d8b2d8a7d98ad8a720d985d986d987d8a7d89f20d984d983d98620d985d98620d984d98720d8a7d984d8add98220d981d98a20d8a7d984d8b9d8abd988d8b120d8b9d984d98920d8aed8b7d8a320d985d8b920d8b1d8acd98420d98ad8aed8aad8a7d8b120d8a7d984d8a7d8b3d8aad985d8aad8a7d8b920d8a8d8b3d8b1d988d8b120d984d98ad8b320d984d98720d8b9d988d8a7d982d8a820d985d8b2d8b9d8acd8a920d88c20d8a3d98820d985d98620d98ad8aad8acd986d8a820d8a7d984d8a3d984d98520d8a7d984d8b0d98a20d984d8a720d98ad986d8aad8ac20d8b9d986d98720d985d8aad8b9d8a920203c2f7370616e3e3c2f703e203c703e203c6272202f3e20203c2f703e3c703e203c7370616e3e20d988d984d983d98620d98ad8acd8a820d8a3d98620d8a3d8b4d8b1d8ad20d984d98320d983d98ad98120d983d98420d987d8b0d98720d8a7d984d981d983d8b1d8a920d8a7d984d8aed8a7d8b7d8a6d8a920d985d98620d8a5d8afd8a7d986d8a920d8a7d984d984d8b0d8a920d988d8aad985d8acd98ad8af20d8a7d984d8a3d984d98520d988d984d8afd8aa20d988d8b3d8a3d982d8afd98520d984d98320d988d8b5d981d98bd8a720d983d8a7d985d984d8a7d98b20d984d984d986d8b8d8a7d98520d88c20d988d8a3d8b4d8b1d8ad20d8a7d984d8aad8b9d8a7d984d98ad98520d8a7d984d981d8b9d984d98ad8a920d984d984d985d8b3d8aad983d8b4d98120d8a7d984d8b9d8b8d98ad98520d984d984d8add982d98ad982d8a920d88c20d8a7d984d8a8d8a7d986d98a20d8a7d984d8a8d8a7d8b1d8b920d984d984d8b3d8b9d8a7d8afd8a920d8a7d984d8a8d8b4d8b1d98ad8a92e20d984d8a720d8a3d8add8af20d98ad8b1d981d8b620d8a3d98820d98ad983d8b1d98720d8a3d98820d98ad8aad8acd986d8a820d8a7d984d985d8aad8b9d8a920d986d981d8b3d987d8a720d88c20d984d8a3d986d987d8a720d985d8aad8b9d8a920d88c20d988d984d983d98620d984d8a3d98620d8a3d988d984d8a6d98320d8a7d984d8b0d98ad98620d984d8a720d98ad8b9d8b1d981d988d98620d983d98ad981d98ad8a920d8a7d984d8b3d8b9d98a20d988d8b1d8a7d8a120d8a7d984d985d8aad8b9d8a920d98ad988d8a7d8acd987d988d98620d8b9d988d8a7d982d8a820d985d8a4d984d985d8a920d984d984d8bad8a7d98ad8a92e20d988d984d8a720d98ad988d8acd8af20d8a3d98ad8b6d98bd8a720d8a3d98a20d8b4d8aed8b520d98ad8add8a820d8a3d98820d98ad8b3d8b9d98920d8a3d98820d98ad8b1d8bad8a820d981d98a20d8a7d984d8add8b5d988d98420d8b9d984d98920d8a7d984d8a3d984d98520d985d98620d986d981d8b3d98720d88c20d984d8a3d986d98720d8a3d984d98520d88c20d988d984d983d98620d984d8a3d986d98720d98ad8add8afd8ab20d8a3d8add98ad8a7d986d98bd8a720d8b8d8b1d988d98120d98ad985d983d98620d8a3d98620d98ad985d986d8add98720d981d98ad987d8a720d8a7d984d983d8afd8ad20d988d8a7d984d8a3d984d98520d8a8d8b9d8b620d8a7d984d985d8aad8b9d8a920d8a7d984d8b9d8b8d98ad985d8a92e20d984d986d8a3d8aed8b020d985d8abd8a7d984d8a720d8aad8a7d981d987d8a720d88c20d8a3d98a20d985d986d8a720d98ad982d988d98520d8a8d8aad985d8a7d8b1d98ad98620d8a8d8afd986d98ad8a920d8b4d8a7d982d8a920d88c20d8a5d984d8a720d984d984d8add8b5d988d98420d8b9d984d98920d8a8d8b9d8b620d8a7d984d985d8b2d8a7d98ad8a720d985d986d987d8a7d89f20d988d984d983d98620d985d98620d984d98720d8a7d984d8add98220d981d98a20d8a7d984d8b9d8abd988d8b120d8b9d984d98920d8aed8b7d8a320d985d8b920d8b1d8acd98420d98ad8aed8aad8a7d8b120d8a7d984d8a7d8b3d8aad985d8aad8a7d8b920d8a8d8b3d8b1d988d8b120d984d98ad8b320d984d98720d8b9d988d8a7d982d8a820d985d8b2d8b9d8acd8a920d88c20d8a3d98820d985d98620d98ad8aad8acd986d8a820d8a7d984d8a3d984d98520d8a7d984d8b0d98a20d984d8a720d98ad986d8aad8ac20d8b9d986d98720d985d8aad8b9d8a920203c7370616e3e203c6272202f3e203c2f7370616e3e203c6272202f3e203c2f7370616e3e3c2f703e, 1, NULL, NULL, '2021-07-25 01:22:57', '2021-07-25 21:19:15'),
 (13, 177, 'البنود و الظروف', 'البنود و الظروف', 'البنود-و-الظروف', 0x3c68323ed8b4d8b1d988d8b720d988d8a3d985d8a8d98ad8b12e20d8a7d984d8b4d8b1d988d8b7203c2f68323e3c756c3e203c6c69207374796c653d226c696e652d6865696768743a333b223e203c7370616e3e206c6f72656d20697073756d20636172726f747320d88c20d8aad8add8b3d98ad98620d8a7d984d8a8d98ad8a6d8a920d8a7d984d8a8d98ad8a6d98ad8a92e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d8a3d8add8afd8ab20d985d8b7d988d991d8b1d98a20d8a7d984d8a8d8b1d8a7d985d8ac20d985d988d8b1d98ad8b320d98ad8b6d8add983d988d9862e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e2066656c69732070726f7465696e206f722e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d8a7d984d8a2d98620d8b6d8add98320d983d8b1d8a920d8a7d984d982d8afd98520d984d984d8aed988d9812e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d985d8b7d988d8b120d983d8b1d8a920d8a7d984d982d8afd98520d8a7d984d8add8b2d98ad98620d8bad8afd98bd8a72e2020266c743b202f206c692667743b203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d8a7d984d8b1d987d8a7d98620d8a7d984d985d8a8d8a7d8b4d8b1206e74756c6c6120d984d98ad8b320d982d8a8d98420d8b0d984d9832e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d985d988d8acd988d8af20d8a5d98ad8b1d988d8b320d8a7d984d8b9d982d8a7d8b1d98ad8a920d8a7d984d8b6d8add9832e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20436c696e6963616c2070726f6d6f206e6962682e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d8b9d8afd8af20d8b5d8add98ad8ad20d8bad98ad8b120d985d8b9d988d98220d988d8a7d8b3d8aad8abd985d8a7d8b120d8a7d984d8b6d8add9832e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d8b2d8b120d8a7d984d8afd987d984d98ad8b220d8b9d984d98920d8afd8b1d8acd8a920d8a7d984d8add8b1d8a7d8b1d8a92e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d8a5d984d98920d8a8d8b9d8b620d8a3d8b3d8af20d8a7d984d8b1d8b9d8a7d98ad8a92e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d8aad8b3d8aad987d8afd98120d8a7d984d8bad8af20d8a7d984d985d8aad8b7d8b1d981d98ad98620d8b5d981d8b12e2020203c2f7370616e3e3c2f6c693e3c6c693e203c7370616e3e20d8add8aad9892064756920d981d98a20d8a3d98a20d988d982d8aa20d988d984d983d98620d8a3d8add98ad8a7d986d98bd8a720d98ad983d988d98620d8a7d984d8a3d984d9852e2020203c2f7370616e3e3c2f6c693e3c2f756c3e, 1, NULL, NULL, '2021-07-25 01:25:50', '2021-07-25 21:19:59');
@@ -843,19 +843,19 @@ INSERT INTO `pages` (`id`, `language_id`, `name`, `title`, `slug`, `body`, `stat
 --
 
 CREATE TABLE `page_headings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `blog_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `blog_details_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contact_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `courses_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `course_details_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `faq_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `forget_password_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `instructors_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `login_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `signup_page_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `blog_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `blog_details_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `courses_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `course_details_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `faq_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `forget_password_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `instructors_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `login_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `signup_page_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -879,14 +879,14 @@ INSERT INTO `page_headings` (`id`, `language_id`, `user_id`, `blog_page_title`, 
 --
 
 CREATE TABLE `partners` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int NOT NULL,
   `image` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `serial_number` int(11) NOT NULL,
+  `serial_number` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `partners`
@@ -912,7 +912,7 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -921,7 +921,7 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `payment_gateways` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `details` text,
@@ -929,8 +929,8 @@ CREATE TABLE `payment_gateways` (
   `type` varchar(20) NOT NULL DEFAULT 'manual',
   `information` mediumtext,
   `keyword` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` tinyint NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `payment_gateways`
@@ -954,8 +954,8 @@ INSERT INTO `payment_gateways` (`id`, `subtitle`, `title`, `details`, `name`, `t
 --
 
 CREATE TABLE `popups` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
   `background_image` varchar(100) DEFAULT NULL,
@@ -968,13 +968,13 @@ CREATE TABLE `popups` (
   `button_color` varchar(20) DEFAULT NULL,
   `end_date` varchar(255) DEFAULT NULL,
   `end_time` varchar(255) DEFAULT NULL,
-  `delay` int(11) NOT NULL DEFAULT '1000' COMMENT 'in milisconds',
-  `serial_number` int(11) NOT NULL DEFAULT '0',
-  `type` tinyint(4) NOT NULL DEFAULT '1',
+  `delay` int NOT NULL DEFAULT '1000' COMMENT 'in milisconds',
+  `serial_number` int NOT NULL DEFAULT '0',
+  `type` tinyint NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1 - active, 0 - deactive'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `status` tinyint NOT NULL DEFAULT '1' COMMENT '1 - active, 0 - deactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `popups`
@@ -993,14 +993,14 @@ INSERT INTO `popups` (`id`, `language_id`, `name`, `image`, `background_image`, 
 --
 
 CREATE TABLE `processes` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `language_id` int DEFAULT NULL,
   `icon` varchar(50) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `text` varchar(255) DEFAULT NULL,
   `btn_text` varchar(100) DEFAULT NULL,
-  `serial_number` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `serial_number` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `processes`
@@ -1023,12 +1023,12 @@ INSERT INTO `processes` (`id`, `language_id`, `icon`, `title`, `text`, `btn_text
 --
 
 CREATE TABLE `roles` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `permissions` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `roles`
@@ -1045,8 +1045,8 @@ INSERT INTO `roles` (`id`, `name`, `permissions`, `created_at`, `updated_at`) VA
 --
 
 CREATE TABLE `seos` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `language_id` int DEFAULT NULL,
   `home_meta_keywords` text,
   `home_meta_description` text,
   `profiles_meta_keywords` text,
@@ -1065,7 +1065,7 @@ CREATE TABLE `seos` (
   `forget_password_meta_description` text,
   `checkout_meta_keywords` text,
   `checkout_meta_description` text
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `seos`
@@ -1082,12 +1082,12 @@ INSERT INTO `seos` (`id`, `language_id`, `home_meta_keywords`, `home_meta_descri
 --
 
 CREATE TABLE `sitemaps` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `sitemap_url` varchar(255) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `sitemaps`
@@ -1103,11 +1103,11 @@ INSERT INTO `sitemaps` (`id`, `sitemap_url`, `filename`, `created_at`, `updated_
 --
 
 CREATE TABLE `socials` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `icon` text,
   `url` varchar(255) DEFAULT NULL,
-  `serial_number` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `serial_number` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `socials`
@@ -1127,11 +1127,11 @@ INSERT INTO `socials` (`id`, `icon`, `url`, `serial_number`) VALUES
 --
 
 CREATE TABLE `subscribers` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `email` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `subscribers`
@@ -1155,16 +1155,16 @@ INSERT INTO `subscribers` (`id`, `email`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `testimonials` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `comment` text,
   `name` varchar(255) DEFAULT NULL,
   `rank` varchar(255) DEFAULT NULL,
-  `serial_number` int(11) DEFAULT NULL,
+  `serial_number` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `testimonials`
@@ -1187,13 +1187,13 @@ INSERT INTO `testimonials` (`id`, `language_id`, `image`, `comment`, `name`, `ra
 --
 
 CREATE TABLE `timezones` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `country_code` varchar(10) NOT NULL,
   `timezone` varchar(125) NOT NULL,
   `gmt_offset` decimal(10,2) NOT NULL,
   `dst_offset` decimal(10,2) NOT NULL,
   `raw_offset` decimal(10,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `timezones`
@@ -1626,13 +1626,13 @@ INSERT INTO `timezones` (`id`, `country_code`, `timezone`, `gmt_offset`, `dst_of
 --
 
 CREATE TABLE `ulinks` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` int(11) NOT NULL DEFAULT '0',
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` int NOT NULL DEFAULT '0',
   `name` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `ulinks`
@@ -1657,7 +1657,7 @@ INSERT INTO `ulinks` (`id`, `language_id`, `name`, `url`, `created_at`, `updated
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `photo` varchar(255) DEFAULT NULL,
@@ -1671,18 +1671,18 @@ CREATE TABLE `users` (
   `address` varchar(255) DEFAULT NULL,
   `country` varchar(255) DEFAULT NULL,
   `remember_token` varchar(255) DEFAULT NULL,
-  `featured` int(11) NOT NULL DEFAULT '0',
-  `status` int(11) NOT NULL DEFAULT '0',
-  `online_status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1 = Active ,0 = offline',
+  `featured` int NOT NULL DEFAULT '0',
+  `status` int NOT NULL DEFAULT '0',
+  `online_status` tinyint NOT NULL DEFAULT '1' COMMENT '1 = Active ,0 = offline',
   `verification_link` text,
-  `email_verified` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1 - verified, 0 - not verified',
-  `subdomain_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 - pending, 1 - connected',
-  `preview_template` tinyint(4) NOT NULL DEFAULT '0',
+  `email_verified` tinyint NOT NULL DEFAULT '0' COMMENT '1 - verified, 0 - not verified',
+  `subdomain_status` tinyint NOT NULL DEFAULT '0' COMMENT '0 - pending, 1 - connected',
+  `preview_template` tinyint NOT NULL DEFAULT '0',
   `template_img` varchar(100) DEFAULT NULL,
-  `template_serial_number` int(11) NOT NULL DEFAULT '0',
+  `template_serial_number` int NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `users`
@@ -1700,16 +1700,16 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `photo`, `username`, `emai
 --
 
 CREATE TABLE `user_about_us_sections` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
   `text` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_about_us_sections`
@@ -1726,9 +1726,9 @@ INSERT INTO `user_about_us_sections` (`id`, `language_id`, `user_id`, `image`, `
 --
 
 CREATE TABLE `user_action_sections` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `background_image` varchar(255) NOT NULL,
   `first_title` varchar(255) DEFAULT NULL,
   `second_title` varchar(255) DEFAULT NULL,
@@ -1739,7 +1739,7 @@ CREATE TABLE `user_action_sections` (
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_action_sections`
@@ -1758,17 +1758,17 @@ INSERT INTO `user_action_sections` (`id`, `language_id`, `user_id`, `background_
 --
 
 CREATE TABLE `user_advertisements` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `ad_type` varchar(255) NOT NULL,
-  `resolution_type` smallint(5) UNSIGNED NOT NULL COMMENT '1 => 300 x 250, 2 => 300 x 600, 3 => 728 x 90',
+  `resolution_type` smallint UNSIGNED NOT NULL COMMENT '1 => 300 x 250, 2 => 300 x 600, 3 => 728 x 90',
   `image` varchar(255) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `slot` varchar(50) DEFAULT NULL,
-  `views` int(10) UNSIGNED NOT NULL DEFAULT '0',
+  `views` int UNSIGNED NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_advertisements`
@@ -1801,7 +1801,7 @@ INSERT INTO `user_advertisements` (`id`, `user_id`, `ad_type`, `resolution_type`
 --
 
 CREATE TABLE `user_basic_settings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `favicon` text,
   `breadcrumb` varchar(255) DEFAULT NULL,
   `footer_logo` varchar(255) DEFAULT NULL,
@@ -1810,26 +1810,26 @@ CREATE TABLE `user_basic_settings` (
   `secondary_color` varchar(30) DEFAULT 'F16001',
   `breadcrumb_overlay_color` varchar(30) DEFAULT '001B61',
   `breadcrumb_overlay_opacity` decimal(4,2) DEFAULT '0.50',
-  `theme_version` smallint(5) NOT NULL DEFAULT '1',
+  `theme_version` smallint NOT NULL DEFAULT '1',
   `email` varchar(50) DEFAULT NULL,
   `from_name` varchar(50) DEFAULT NULL,
-  `is_quote` tinyint(4) NOT NULL DEFAULT '1',
-  `user_id` int(11) NOT NULL,
+  `is_quote` tinyint NOT NULL DEFAULT '1',
+  `user_id` int NOT NULL,
   `qr_image` varchar(100) DEFAULT NULL,
   `qr_color` varchar(50) NOT NULL DEFAULT '000000',
-  `qr_size` int(11) NOT NULL DEFAULT '250',
+  `qr_size` int NOT NULL DEFAULT '250',
   `qr_style` varchar(250) NOT NULL DEFAULT 'square',
   `qr_eye_style` varchar(250) NOT NULL DEFAULT 'square',
-  `qr_margin` int(11) NOT NULL DEFAULT '0',
+  `qr_margin` int NOT NULL DEFAULT '0',
   `qr_text` varchar(255) DEFAULT NULL,
   `qr_text_color` varchar(50) NOT NULL DEFAULT '000000',
-  `qr_text_size` int(11) NOT NULL DEFAULT '15',
-  `qr_text_x` int(11) NOT NULL DEFAULT '50',
-  `qr_text_y` int(11) NOT NULL DEFAULT '50',
+  `qr_text_size` int NOT NULL DEFAULT '15',
+  `qr_text_x` int NOT NULL DEFAULT '50',
+  `qr_text_y` int NOT NULL DEFAULT '50',
   `qr_inserted_image` varchar(250) DEFAULT NULL,
-  `qr_inserted_image_size` int(11) NOT NULL DEFAULT '20',
-  `qr_inserted_image_x` int(11) NOT NULL DEFAULT '50',
-  `qr_inserted_image_y` int(11) NOT NULL DEFAULT '50',
+  `qr_inserted_image_size` int NOT NULL DEFAULT '20',
+  `qr_inserted_image_x` int NOT NULL DEFAULT '50',
+  `qr_inserted_image_y` int NOT NULL DEFAULT '50',
   `qr_type` varchar(50) NOT NULL DEFAULT 'default' COMMENT 'default, image, text',
   `qr_url` varchar(255) DEFAULT NULL,
   `base_currency_symbol` varchar(255) DEFAULT '$',
@@ -1843,20 +1843,20 @@ CREATE TABLE `user_basic_settings` (
   `address` varchar(255) DEFAULT NULL,
   `latitude` decimal(8,5) DEFAULT NULL,
   `longitude` decimal(8,5) DEFAULT NULL,
-  `disqus_status` tinyint(3) DEFAULT NULL,
+  `disqus_status` tinyint DEFAULT NULL,
   `disqus_short_name` varchar(255) DEFAULT NULL,
-  `whatsapp_status` tinyint(3) DEFAULT NULL,
+  `whatsapp_status` tinyint DEFAULT NULL,
   `whatsapp_number` varchar(20) DEFAULT NULL,
   `whatsapp_header_title` varchar(255) DEFAULT NULL,
-  `whatsapp_popup_status` tinyint(3) DEFAULT NULL,
+  `whatsapp_popup_status` tinyint DEFAULT NULL,
   `whatsapp_popup_message` text,
-  `aws_status` tinyint(3) DEFAULT NULL,
+  `aws_status` tinyint DEFAULT NULL,
   `aws_access_key_id` varchar(255) DEFAULT NULL,
   `aws_secret_access_key` varchar(255) DEFAULT NULL,
   `aws_default_region` varchar(255) DEFAULT NULL,
   `aws_bucket` varchar(255) DEFAULT NULL,
   `maintenance_img` varchar(255) DEFAULT NULL,
-  `maintenance_status` tinyint(4) DEFAULT NULL,
+  `maintenance_status` tinyint DEFAULT NULL,
   `maintenance_msg` text,
   `bypass_token` varchar(255) DEFAULT NULL,
   `features_section_image` text,
@@ -1866,7 +1866,7 @@ CREATE TABLE `user_basic_settings` (
   `storage_usage` float DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_basic_settings`
@@ -1884,13 +1884,13 @@ INSERT INTO `user_basic_settings` (`id`, `favicon`, `breadcrumb`, `footer_logo`,
 --
 
 CREATE TABLE `user_blogs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `image` varchar(255) NOT NULL,
-  `serial_number` mediumint(8) UNSIGNED NOT NULL,
+  `serial_number` mediumint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_blogs`
@@ -1923,16 +1923,16 @@ INSERT INTO `user_blogs` (`id`, `user_id`, `image`, `serial_number`, `created_at
 --
 
 CREATE TABLE `user_blog_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) DEFAULT NULL,
-  `status` tinyint(3) UNSIGNED NOT NULL,
-  `serial_number` mediumint(8) UNSIGNED NOT NULL,
+  `status` tinyint UNSIGNED NOT NULL,
+  `serial_number` mediumint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_blog_categories`
@@ -1971,11 +1971,11 @@ INSERT INTO `user_blog_categories` (`id`, `language_id`, `user_id`, `name`, `slu
 --
 
 CREATE TABLE `user_blog_informations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `blog_category_id` bigint(20) UNSIGNED NOT NULL,
-  `blog_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `blog_category_id` bigint UNSIGNED NOT NULL,
+  `blog_id` bigint UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `author` varchar(255) NOT NULL,
@@ -1984,7 +1984,7 @@ CREATE TABLE `user_blog_informations` (
   `meta_description` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_blog_informations`
@@ -2037,17 +2037,17 @@ INSERT INTO `user_blog_informations` (`id`, `language_id`, `user_id`, `blog_cate
 --
 
 CREATE TABLE `user_count_informations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `color` varchar(255) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
-  `amount` int(10) UNSIGNED NOT NULL,
-  `serial_number` int(10) UNSIGNED NOT NULL,
+  `amount` int UNSIGNED NOT NULL,
+  `serial_number` int UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_count_informations`
@@ -2086,8 +2086,8 @@ INSERT INTO `user_count_informations` (`id`, `language_id`, `user_id`, `icon`, `
 --
 
 CREATE TABLE `user_coupons` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
@@ -2097,7 +2097,7 @@ CREATE TABLE `user_coupons` (
   `courses` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -2106,24 +2106,24 @@ CREATE TABLE `user_coupons` (
 --
 
 CREATE TABLE `user_courses` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `thumbnail_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `video_link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cover_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pricing_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `thumbnail_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `video_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cover_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pricing_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `previous_price` decimal(8,2) UNSIGNED DEFAULT NULL,
   `current_price` decimal(8,2) UNSIGNED DEFAULT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',
-  `is_featured` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no',
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',
+  `is_featured` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'no',
   `average_rating` decimal(2,1) UNSIGNED DEFAULT NULL,
   `duration` time DEFAULT '00:00:00',
-  `certificate_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `video_watching` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `quiz_completion` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `certificate_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `video_watching` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `quiz_completion` tinyint UNSIGNED NOT NULL DEFAULT '0',
   `min_quiz_score` decimal(8,2) NOT NULL DEFAULT '0.00',
-  `certificate_title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `certificate_text` mediumtext COLLATE utf8mb4_unicode_ci,
+  `certificate_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `certificate_text` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2174,19 +2174,19 @@ INSERT INTO `user_courses` (`id`, `user_id`, `thumbnail_image`, `video_link`, `c
 --
 
 CREATE TABLE `user_course_categories` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `language_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `color` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `serial_number` int(11) DEFAULT NULL,
-  `is_featured` int(11) DEFAULT NULL,
+  `status` int DEFAULT NULL,
+  `serial_number` int DEFAULT NULL,
+  `is_featured` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_course_categories`
@@ -2225,10 +2225,10 @@ INSERT INTO `user_course_categories` (`id`, `language_id`, `user_id`, `icon`, `c
 --
 
 CREATE TABLE `user_course_enrolments` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `order_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `customer_id` int NOT NULL,
+  `order_id` bigint UNSIGNED NOT NULL,
   `billing_first_name` varchar(255) NOT NULL,
   `billing_last_name` varchar(255) NOT NULL,
   `billing_email` varchar(255) NOT NULL,
@@ -2237,7 +2237,7 @@ CREATE TABLE `user_course_enrolments` (
   `billing_city` varchar(255) NOT NULL,
   `billing_state` varchar(255) DEFAULT NULL,
   `billing_country` varchar(255) NOT NULL,
-  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `course_id` bigint UNSIGNED NOT NULL,
   `course_price` decimal(11,2) UNSIGNED DEFAULT NULL,
   `discount` decimal(11,2) UNSIGNED DEFAULT NULL,
   `grand_total` decimal(11,2) UNSIGNED DEFAULT NULL,
@@ -2252,7 +2252,7 @@ CREATE TABLE `user_course_enrolments` (
   `invoice` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_course_enrolments`
@@ -2275,16 +2275,16 @@ INSERT INTO `user_course_enrolments` (`id`, `user_id`, `customer_id`, `order_id`
 --
 
 CREATE TABLE `user_course_faqs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `course_id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `course_id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `question` varchar(255) NOT NULL,
   `answer` text NOT NULL,
-  `serial_number` mediumint(8) UNSIGNED NOT NULL,
+  `serial_number` mediumint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_course_faqs`
@@ -2498,14 +2498,14 @@ INSERT INTO `user_course_faqs` (`id`, `course_id`, `language_id`, `user_id`, `qu
 --
 
 CREATE TABLE `user_course_informations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `course_category_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `course_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `course_category_id` bigint UNSIGNED DEFAULT NULL,
+  `course_id` bigint UNSIGNED DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `slug` varchar(255) DEFAULT NULL,
-  `instructor_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `instructor_id` bigint UNSIGNED DEFAULT NULL,
   `features` text,
   `description` blob,
   `meta_keywords` varchar(255) DEFAULT NULL,
@@ -2513,7 +2513,7 @@ CREATE TABLE `user_course_informations` (
   `thanks_page_content` blob,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_course_informations`
@@ -2604,17 +2604,17 @@ INSERT INTO `user_course_informations` (`id`, `language_id`, `user_id`, `course_
 --
 
 CREATE TABLE `user_course_modules` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `course_information_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `language_id` int DEFAULT NULL,
+  `course_information_id` bigint UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
-  `serial_number` int(10) UNSIGNED NOT NULL,
+  `serial_number` int UNSIGNED NOT NULL,
   `duration` time NOT NULL DEFAULT '00:00:00',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_course_modules`
@@ -2959,15 +2959,15 @@ INSERT INTO `user_course_modules` (`id`, `user_id`, `language_id`, `course_infor
 --
 
 CREATE TABLE `user_course_reviews` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `course_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `customer_id` int NOT NULL,
+  `course_id` bigint UNSIGNED NOT NULL,
   `comment` text,
-  `rating` smallint(5) UNSIGNED NOT NULL,
+  `rating` smallint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_course_reviews`
@@ -2984,14 +2984,14 @@ INSERT INTO `user_course_reviews` (`id`, `user_id`, `customer_id`, `course_id`, 
 --
 
 CREATE TABLE `user_custom_domains` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
   `requested_domain` varchar(255) DEFAULT NULL,
   `current_domain` varchar(255) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL COMMENT '0 - Pending, 1 - Connected, 2 - Rejected, 3 - Removed',
+  `status` tinyint NOT NULL COMMENT '0 - Pending, 1 - Connected, 2 - Rejected, 3 - Removed',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_custom_domains`
@@ -3007,15 +3007,15 @@ INSERT INTO `user_custom_domains` (`id`, `user_id`, `requested_domain`, `current
 --
 
 CREATE TABLE `user_faqs` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `language_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
   `question` varchar(255) NOT NULL,
   `answer` text NOT NULL,
-  `serial_number` int(11) NOT NULL,
+  `serial_number` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_faqs`
@@ -3066,17 +3066,17 @@ INSERT INTO `user_faqs` (`id`, `language_id`, `user_id`, `question`, `answer`, `
 --
 
 CREATE TABLE `user_features` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `background_color` varchar(255) NOT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `text` text NOT NULL,
-  `serial_number` int(10) UNSIGNED NOT NULL,
+  `serial_number` int UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_features`
@@ -3109,15 +3109,15 @@ INSERT INTO `user_features` (`id`, `language_id`, `user_id`, `background_color`,
 --
 
 CREATE TABLE `user_footer_quick_links` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `language_id` int NOT NULL,
   `title` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
-  `serial_number` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `serial_number` int NOT NULL,
+  `user_id` int DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_footer_quick_links`
@@ -3150,16 +3150,16 @@ INSERT INTO `user_footer_quick_links` (`id`, `language_id`, `title`, `url`, `ser
 --
 
 CREATE TABLE `user_footer_texts` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `language_id` int NOT NULL,
   `footer_background_color` varchar(30) DEFAULT NULL,
   `about_company` text,
   `copyright_background_color` varchar(255) DEFAULT NULL,
   `copyright_text` text,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_footer_texts`
@@ -3180,14 +3180,14 @@ INSERT INTO `user_footer_texts` (`id`, `language_id`, `footer_background_color`,
 --
 
 CREATE TABLE `user_fun_fact_sections` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `background_image` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_fun_fact_sections`
@@ -3206,9 +3206,9 @@ INSERT INTO `user_fun_fact_sections` (`id`, `language_id`, `user_id`, `backgroun
 --
 
 CREATE TABLE `user_hero_sections` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `background_image` varchar(255) NOT NULL,
   `first_title` varchar(255) DEFAULT NULL,
   `second_title` varchar(255) DEFAULT NULL,
@@ -3220,7 +3220,7 @@ CREATE TABLE `user_hero_sections` (
   `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_hero_sections`
@@ -3241,25 +3241,25 @@ INSERT INTO `user_hero_sections` (`id`, `language_id`, `user_id`, `background_im
 --
 
 CREATE TABLE `user_home_sections` (
-  `id` int(11) NOT NULL,
-  `intro_section` tinyint(4) DEFAULT '1',
-  `featured_services_section` tinyint(4) DEFAULT '1',
-  `video_section` tinyint(4) DEFAULT '1',
-  `portfolio_section` tinyint(4) DEFAULT '1',
-  `why_choose_us_section` tinyint(4) DEFAULT '1',
-  `counter_info_section` tinyint(4) DEFAULT '1',
-  `team_members_section` tinyint(4) DEFAULT '1',
-  `skills_section` tinyint(4) DEFAULT '1',
-  `testimonials_section` tinyint(4) DEFAULT '1',
-  `brand_section` tinyint(4) DEFAULT '1',
-  `blogs_section` tinyint(4) DEFAULT '1',
-  `faq_section` tinyint(4) DEFAULT '1',
-  `contact_section` tinyint(4) DEFAULT '1',
-  `top_footer_section` tinyint(4) DEFAULT '1',
-  `copyright_section` tinyint(4) DEFAULT '1',
-  `work_process_section` tinyint(4) NOT NULL DEFAULT '1',
-  `user_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int NOT NULL,
+  `intro_section` tinyint DEFAULT '1',
+  `featured_services_section` tinyint DEFAULT '1',
+  `video_section` tinyint DEFAULT '1',
+  `portfolio_section` tinyint DEFAULT '1',
+  `why_choose_us_section` tinyint DEFAULT '1',
+  `counter_info_section` tinyint DEFAULT '1',
+  `team_members_section` tinyint DEFAULT '1',
+  `skills_section` tinyint DEFAULT '1',
+  `testimonials_section` tinyint DEFAULT '1',
+  `brand_section` tinyint DEFAULT '1',
+  `blogs_section` tinyint DEFAULT '1',
+  `faq_section` tinyint DEFAULT '1',
+  `contact_section` tinyint DEFAULT '1',
+  `top_footer_section` tinyint DEFAULT '1',
+  `copyright_section` tinyint DEFAULT '1',
+  `work_process_section` tinyint NOT NULL DEFAULT '1',
+  `user_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -3268,17 +3268,17 @@ CREATE TABLE `user_home_sections` (
 --
 
 CREATE TABLE `user_instructors` (
-  `id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `language_id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
   `image` text NOT NULL,
   `name` varchar(255) NOT NULL,
   `occupation` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `is_featured` int(11) NOT NULL DEFAULT '0',
+  `is_featured` int NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_instructors`
@@ -3317,16 +3317,16 @@ INSERT INTO `user_instructors` (`id`, `language_id`, `user_id`, `image`, `name`,
 --
 
 CREATE TABLE `user_languages` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `code` varchar(255) NOT NULL,
-  `is_default` tinyint(4) NOT NULL DEFAULT '0',
-  `rtl` tinyint(4) NOT NULL COMMENT '0 - LTR, 1- RTL',
+  `is_default` tinyint NOT NULL DEFAULT '0',
+  `rtl` tinyint NOT NULL COMMENT '0 - LTR, 1- RTL',
   `keywords` longtext,
-  `user_id` int(11) DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_languages`
@@ -3349,15 +3349,15 @@ INSERT INTO `user_languages` (`id`, `name`, `code`, `is_default`, `rtl`, `keywor
 --
 
 CREATE TABLE `user_lessons` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `module_id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `serial_number` int(10) UNSIGNED NOT NULL,
-  `duration` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `completion_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `language_id` int DEFAULT NULL,
+  `module_id` bigint UNSIGNED NOT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `serial_number` int UNSIGNED NOT NULL,
+  `duration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `completion_status` tinyint UNSIGNED NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4295,11 +4295,11 @@ INSERT INTO `user_lessons` (`id`, `user_id`, `language_id`, `module_id`, `title`
 --
 
 CREATE TABLE `user_lesson_complete` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `customer_id` int(11) DEFAULT NULL,
-  `lesson_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `customer_id` int DEFAULT NULL,
+  `lesson_id` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_lesson_complete`
@@ -4363,20 +4363,20 @@ INSERT INTO `user_lesson_complete` (`id`, `user_id`, `customer_id`, `lesson_id`)
 --
 
 CREATE TABLE `user_lesson_contents` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `lesson_id` bigint(20) UNSIGNED NOT NULL,
-  `video_unique_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `video_original_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `lesson_id` bigint UNSIGNED NOT NULL,
+  `video_unique_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_original_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `video_duration` time DEFAULT NULL,
-  `video_preview` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `file_unique_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `file_original_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `video_preview` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_unique_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_original_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `text` blob,
-  `code` text COLLATE utf8mb4_unicode_ci,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `order_no` int(10) UNSIGNED NOT NULL DEFAULT '1',
-  `completion_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
+  `code` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_no` int UNSIGNED NOT NULL DEFAULT '1',
+  `completion_status` tinyint UNSIGNED NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5073,13 +5073,13 @@ INSERT INTO `user_lesson_contents` (`id`, `user_id`, `lesson_id`, `video_unique_
 --
 
 CREATE TABLE `user_lesson_content_complete` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `customer_id` int(11) DEFAULT NULL,
-  `lesson_id` int(11) DEFAULT NULL,
-  `lesson_content_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `customer_id` int DEFAULT NULL,
+  `lesson_id` int DEFAULT NULL,
+  `lesson_content_id` int DEFAULT NULL,
   `type` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_lesson_content_complete`
@@ -5124,12 +5124,12 @@ INSERT INTO `user_lesson_content_complete` (`id`, `user_id`, `customer_id`, `les
 --
 
 CREATE TABLE `user_lesson_quizzes` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `lesson_id` bigint(20) UNSIGNED NOT NULL,
-  `lesson_content_id` bigint(20) UNSIGNED NOT NULL,
-  `question` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `answers` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `lesson_id` bigint UNSIGNED NOT NULL,
+  `lesson_content_id` bigint UNSIGNED NOT NULL,
+  `question` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `answers` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5256,12 +5256,12 @@ INSERT INTO `user_lesson_quizzes` (`id`, `user_id`, `lesson_id`, `lesson_content
 --
 
 CREATE TABLE `user_mail_templates` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
   `mail_type` varchar(50) NOT NULL,
   `mail_subject` varchar(255) NOT NULL,
   `mail_body` longtext
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `user_mail_templates`
@@ -5291,10 +5291,10 @@ INSERT INTO `user_mail_templates` (`id`, `user_id`, `mail_type`, `mail_subject`,
 --
 
 CREATE TABLE `user_menus` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `language_id` int(11) DEFAULT NULL,
-  `menus` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `language_id` int DEFAULT NULL,
+  `menus` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5318,16 +5318,16 @@ INSERT INTO `user_menus` (`id`, `user_id`, `language_id`, `menus`, `created_at`,
 --
 
 CREATE TABLE `user_newsletter_sections` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `background_image` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `text` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_newsletter_sections`
@@ -5348,18 +5348,18 @@ INSERT INTO `user_newsletter_sections` (`id`, `language_id`, `user_id`, `backgro
 --
 
 CREATE TABLE `user_offline_gateways` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `short_description` text,
   `instructions` blob,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  `serial_number` int(11) NOT NULL DEFAULT '0',
-  `is_receipt` tinyint(4) NOT NULL DEFAULT '1',
+  `status` tinyint NOT NULL DEFAULT '1',
+  `serial_number` int NOT NULL DEFAULT '0',
+  `is_receipt` tinyint NOT NULL DEFAULT '1',
   `receipt` varchar(100) DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -5368,12 +5368,12 @@ CREATE TABLE `user_offline_gateways` (
 --
 
 CREATE TABLE `user_pages` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `status` tinyint(3) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int NOT NULL,
+  `status` tinyint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_pages`
@@ -5394,10 +5394,10 @@ INSERT INTO `user_pages` (`id`, `user_id`, `status`, `created_at`, `updated_at`)
 --
 
 CREATE TABLE `user_page_contents` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `page_id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int NOT NULL,
+  `page_id` bigint UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
   `content` blob NOT NULL,
@@ -5405,7 +5405,7 @@ CREATE TABLE `user_page_contents` (
   `meta_description` text,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_page_contents`
@@ -5432,7 +5432,7 @@ INSERT INTO `user_page_contents` (`id`, `language_id`, `user_id`, `page_id`, `ti
 --
 
 CREATE TABLE `user_payment_gateways` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
   `subtitle` varchar(255) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `details` text,
@@ -5440,9 +5440,9 @@ CREATE TABLE `user_payment_gateways` (
   `type` varchar(20) NOT NULL DEFAULT 'manual',
   `information` mediumtext,
   `keyword` varchar(255) DEFAULT NULL,
-  `user_id` int(11) NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `user_id` int NOT NULL,
+  `status` tinyint NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_payment_gateways`
@@ -5478,10 +5478,10 @@ INSERT INTO `user_payment_gateways` (`id`, `subtitle`, `title`, `details`, `name
 --
 
 CREATE TABLE `user_permissions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `package_id` int(11) NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `permissions` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint UNSIGNED NOT NULL,
+  `package_id` int NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `permissions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5502,10 +5502,10 @@ INSERT INTO `user_permissions` (`id`, `package_id`, `user_id`, `permissions`, `c
 --
 
 CREATE TABLE `user_popups` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `type` smallint(5) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int NOT NULL,
+  `type` smallint UNSIGNED NOT NULL,
   `image` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `background_color` varchar(255) DEFAULT NULL,
@@ -5517,12 +5517,12 @@ CREATE TABLE `user_popups` (
   `button_url` varchar(255) DEFAULT NULL,
   `end_date` date DEFAULT NULL,
   `end_time` time DEFAULT NULL,
-  `delay` int(10) UNSIGNED NOT NULL COMMENT 'value will be in milliseconds',
-  `serial_number` mediumint(8) UNSIGNED NOT NULL,
-  `status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '0 => deactive, 1 => active',
+  `delay` int UNSIGNED NOT NULL COMMENT 'value will be in milliseconds',
+  `serial_number` mediumint UNSIGNED NOT NULL,
+  `status` tinyint UNSIGNED NOT NULL DEFAULT '1' COMMENT '0 => deactive, 1 => active',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_popups`
@@ -5543,11 +5543,11 @@ INSERT INTO `user_popups` (`id`, `language_id`, `user_id`, `type`, `image`, `nam
 --
 
 CREATE TABLE `user_qr_codes` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` text COLLATE utf8mb4_unicode_ci,
-  `image` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5566,15 +5566,15 @@ INSERT INTO `user_qr_codes` (`id`, `user_id`, `name`, `url`, `image`, `created_a
 --
 
 CREATE TABLE `user_quiz_scores` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
-  `course_id` int(11) NOT NULL,
-  `lesson_id` int(11) NOT NULL,
-  `score` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `customer_id` int NOT NULL,
+  `course_id` int NOT NULL,
+  `lesson_id` int NOT NULL,
+  `score` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_quiz_scores`
@@ -5590,23 +5590,23 @@ INSERT INTO `user_quiz_scores` (`id`, `user_id`, `customer_id`, `course_id`, `le
 --
 
 CREATE TABLE `user_sections` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `course_categories_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `call_to_action_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `featured_courses_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `features_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `video_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `fun_facts_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `testimonials_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `newsletter_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `featured_instructors_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `about_us_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `latest_blog_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
-  `footer_section_status` tinyint(3) UNSIGNED NOT NULL DEFAULT '1',
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int NOT NULL,
+  `course_categories_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `call_to_action_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `featured_courses_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `features_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `video_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `fun_facts_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `testimonials_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `newsletter_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `featured_instructors_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `about_us_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `latest_blog_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
+  `footer_section_status` tinyint UNSIGNED NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_sections`
@@ -5624,9 +5624,9 @@ INSERT INTO `user_sections` (`id`, `user_id`, `course_categories_section_status`
 --
 
 CREATE TABLE `user_section_titles` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `category_section_title` varchar(255) DEFAULT NULL,
   `featured_courses_section_title` varchar(255) DEFAULT NULL,
   `featured_instructors_section_title` varchar(255) DEFAULT NULL,
@@ -5635,7 +5635,7 @@ CREATE TABLE `user_section_titles` (
   `blog_section_title` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_section_titles`
@@ -5656,9 +5656,9 @@ INSERT INTO `user_section_titles` (`id`, `language_id`, `user_id`, `category_sec
 --
 
 CREATE TABLE `user_seos` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `language_id` int(11) DEFAULT NULL,
+  `id` int NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `language_id` int DEFAULT NULL,
   `home_meta_keywords` varchar(255) DEFAULT NULL,
   `home_meta_description` text,
   `courses_meta_keywords` varchar(255) DEFAULT NULL,
@@ -5677,7 +5677,7 @@ CREATE TABLE `user_seos` (
   `contact_meta_keywords` varchar(255) DEFAULT NULL,
   `forget_password_meta_description` text,
   `forget_password_meta_keywords` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -5686,11 +5686,11 @@ CREATE TABLE `user_seos` (
 --
 
 CREATE TABLE `user_socials` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `icon` text COLLATE utf8mb4_unicode_ci,
-  `url` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `serial_number` int(11) NOT NULL DEFAULT '0',
-  `user_id` int(11) DEFAULT '0',
+  `id` bigint UNSIGNED NOT NULL,
+  `icon` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `serial_number` int NOT NULL DEFAULT '0',
+  `user_id` int DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5723,12 +5723,12 @@ INSERT INTO `user_socials` (`id`, `icon`, `url`, `serial_number`, `user_id`, `cr
 --
 
 CREATE TABLE `user_subscribers` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `email` varchar(255) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id` int NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_subscribers`
@@ -5745,17 +5745,17 @@ INSERT INTO `user_subscribers` (`id`, `email`, `user_id`, `created_at`, `updated
 --
 
 CREATE TABLE `user_testimonials` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `image` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `occupation` varchar(255) NOT NULL,
   `comment` text NOT NULL,
-  `serial_number` int(10) UNSIGNED NOT NULL,
+  `serial_number` int UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_testimonials`
@@ -5782,39 +5782,39 @@ INSERT INTO `user_testimonials` (`id`, `language_id`, `user_id`, `image`, `name`
 --
 
 CREATE TABLE `user_vcards` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `template` tinyint(4) NOT NULL DEFAULT '1' COMMENT 'number represents the template number',
-  `direction` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1 - ltr, 2 - rtl',
-  `profile_image` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `cover_image` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `occupation` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `company` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci,
-  `website_url` text COLLATE utf8mb4_unicode_ci,
-  `introduction` text COLLATE utf8mb4_unicode_ci,
-  `information` text COLLATE utf8mb4_unicode_ci,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
+  `template` tinyint NOT NULL DEFAULT '1' COMMENT 'number represents the template number',
+  `direction` tinyint NOT NULL DEFAULT '1' COMMENT '1 - ltr, 2 - rtl',
+  `profile_image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cover_image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `occupation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `website_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `introduction` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `information` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `vcard_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `about` text COLLATE utf8mb4_unicode_ci,
-  `video` text COLLATE utf8mb4_unicode_ci,
-  `preferences` text COLLATE utf8mb4_unicode_ci,
-  `call_button_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ed2476',
-  `whatsapp_button_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '25d366',
-  `mail_button_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'BB001B',
-  `add_to_contact_button_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FF5C58',
-  `share_vcard_button_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FF5C58',
-  `phone_icon_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFB830',
-  `email_icon_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFB830',
-  `address_icon_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFB830',
-  `website_url_icon_color` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFB830',
-  `keywords` text COLLATE utf8mb4_unicode_ci,
-  `base_color` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'fa2859',
-  `summary_background_color` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFEEED'
+  `vcard_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `about` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `video` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `preferences` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `call_button_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ed2476',
+  `whatsapp_button_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '25d366',
+  `mail_button_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'BB001B',
+  `add_to_contact_button_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FF5C58',
+  `share_vcard_button_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FF5C58',
+  `phone_icon_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFB830',
+  `email_icon_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFB830',
+  `address_icon_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFB830',
+  `website_url_icon_color` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFB830',
+  `keywords` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `base_color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'fa2859',
+  `summary_background_color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'FFEEED'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -5844,14 +5844,14 @@ INSERT INTO `user_vcards` (`id`, `user_id`, `template`, `direction`, `profile_im
 --
 
 CREATE TABLE `user_vcard_projects` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_vcard_id` int(11) DEFAULT NULL,
-  `image` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_details` text COLLATE utf8mb4_unicode_ci,
-  `external_link_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1 - active, 0 - deactive',
-  `external_link` text COLLATE utf8mb4_unicode_ci,
-  `serial_number` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_vcard_id` int DEFAULT NULL,
+  `image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `short_details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `external_link_status` tinyint NOT NULL DEFAULT '0' COMMENT '1 - active, 0 - deactive',
+  `external_link` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `serial_number` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -5911,16 +5911,16 @@ INSERT INTO `user_vcard_projects` (`id`, `user_vcard_id`, `image`, `title`, `sho
 --
 
 CREATE TABLE `user_vcard_services` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_vcard_id` int(11) DEFAULT NULL,
-  `image` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_details` text COLLATE utf8mb4_unicode_ci,
-  `serial_number` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_vcard_id` int DEFAULT NULL,
+  `image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `short_details` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `serial_number` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `external_link_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1 - active, 0 - deactive',
-  `external_link` text COLLATE utf8mb4_unicode_ci
+  `external_link_status` tinyint NOT NULL DEFAULT '0' COMMENT '1 - active, 0 - deactive',
+  `external_link` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -5981,13 +5981,13 @@ INSERT INTO `user_vcard_services` (`id`, `user_vcard_id`, `image`, `title`, `sho
 --
 
 CREATE TABLE `user_vcard_testimonials` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_vcard_id` int(11) DEFAULT NULL,
-  `image` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `rating` int(11) NOT NULL DEFAULT '5',
-  `comment` text COLLATE utf8mb4_unicode_ci,
-  `serial_number` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `user_vcard_id` int DEFAULT NULL,
+  `image` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rating` int NOT NULL DEFAULT '5',
+  `comment` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `serial_number` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -6041,15 +6041,15 @@ INSERT INTO `user_vcard_testimonials` (`id`, `user_vcard_id`, `image`, `name`, `
 --
 
 CREATE TABLE `user_video_sections` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `language_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL,
+  `language_id` bigint UNSIGNED NOT NULL,
+  `user_id` int DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `image` varchar(255) NOT NULL,
   `link` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `user_video_sections`
@@ -6627,529 +6627,529 @@ ALTER TABLE `user_video_sections`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `basic_extendeds`
 --
 ALTER TABLE `basic_extendeds`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 
 --
 -- AUTO_INCREMENT for table `basic_settings`
 --
 ALTER TABLE `basic_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `bcategories`
 --
 ALTER TABLE `bcategories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `cookie_alerts`
 --
 ALTER TABLE `cookie_alerts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `email_templates`
 --
 ALTER TABLE `email_templates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `faqs`
 --
 ALTER TABLE `faqs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `features`
 --
 ALTER TABLE `features`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `followers`
 --
 ALTER TABLE `followers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `instructor_social_links`
 --
 ALTER TABLE `instructor_social_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=178;
 
 --
 -- AUTO_INCREMENT for table `memberships`
 --
 ALTER TABLE `memberships`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=141;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 
 --
 -- AUTO_INCREMENT for table `offline_gateways`
 --
 ALTER TABLE `offline_gateways`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `page_headings`
 --
 ALTER TABLE `page_headings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `partners`
 --
 ALTER TABLE `partners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `payment_gateways`
 --
 ALTER TABLE `payment_gateways`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `popups`
 --
 ALTER TABLE `popups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `processes`
 --
 ALTER TABLE `processes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `seos`
 --
 ALTER TABLE `seos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `sitemaps`
 --
 ALTER TABLE `sitemaps`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `socials`
 --
 ALTER TABLE `socials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `timezones`
 --
 ALTER TABLE `timezones`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
 
 --
 -- AUTO_INCREMENT for table `ulinks`
 --
 ALTER TABLE `ulinks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_about_us_sections`
 --
 ALTER TABLE `user_about_us_sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_action_sections`
 --
 ALTER TABLE `user_action_sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_advertisements`
 --
 ALTER TABLE `user_advertisements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `user_basic_settings`
 --
 ALTER TABLE `user_basic_settings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_blogs`
 --
 ALTER TABLE `user_blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `user_blog_categories`
 --
 ALTER TABLE `user_blog_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `user_blog_informations`
 --
 ALTER TABLE `user_blog_informations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `user_count_informations`
 --
 ALTER TABLE `user_count_informations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user_coupons`
 --
 ALTER TABLE `user_coupons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_courses`
 --
 ALTER TABLE `user_courses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `user_course_categories`
 --
 ALTER TABLE `user_course_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `user_course_enrolments`
 --
 ALTER TABLE `user_course_enrolments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_course_faqs`
 --
 ALTER TABLE `user_course_faqs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
 
 --
 -- AUTO_INCREMENT for table `user_course_informations`
 --
 ALTER TABLE `user_course_informations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `user_course_modules`
 --
 ALTER TABLE `user_course_modules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=337;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=337;
 
 --
 -- AUTO_INCREMENT for table `user_course_reviews`
 --
 ALTER TABLE `user_course_reviews`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_custom_domains`
 --
 ALTER TABLE `user_custom_domains`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_faqs`
 --
 ALTER TABLE `user_faqs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `user_features`
 --
 ALTER TABLE `user_features`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `user_footer_quick_links`
 --
 ALTER TABLE `user_footer_quick_links`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `user_footer_texts`
 --
 ALTER TABLE `user_footer_texts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_fun_fact_sections`
 --
 ALTER TABLE `user_fun_fact_sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_hero_sections`
 --
 ALTER TABLE `user_hero_sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_home_sections`
 --
 ALTER TABLE `user_home_sections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_instructors`
 --
 ALTER TABLE `user_instructors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `user_languages`
 --
 ALTER TABLE `user_languages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `user_lessons`
 --
 ALTER TABLE `user_lessons`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=933;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=933;
 
 --
 -- AUTO_INCREMENT for table `user_lesson_complete`
 --
 ALTER TABLE `user_lesson_complete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `user_lesson_contents`
 --
 ALTER TABLE `user_lesson_contents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=673;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=673;
 
 --
 -- AUTO_INCREMENT for table `user_lesson_content_complete`
 --
 ALTER TABLE `user_lesson_content_complete`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `user_lesson_quizzes`
 --
 ALTER TABLE `user_lesson_quizzes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT for table `user_mail_templates`
 --
 ALTER TABLE `user_mail_templates`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `user_menus`
 --
 ALTER TABLE `user_menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_newsletter_sections`
 --
 ALTER TABLE `user_newsletter_sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_offline_gateways`
 --
 ALTER TABLE `user_offline_gateways`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_pages`
 --
 ALTER TABLE `user_pages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_page_contents`
 --
 ALTER TABLE `user_page_contents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_payment_gateways`
 --
 ALTER TABLE `user_payment_gateways`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `user_permissions`
 --
 ALTER TABLE `user_permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_popups`
 --
 ALTER TABLE `user_popups`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_qr_codes`
 --
 ALTER TABLE `user_qr_codes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_quiz_scores`
 --
 ALTER TABLE `user_quiz_scores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_sections`
 --
 ALTER TABLE `user_sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_section_titles`
 --
 ALTER TABLE `user_section_titles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_seos`
 --
 ALTER TABLE `user_seos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_socials`
 --
 ALTER TABLE `user_socials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `user_subscribers`
 --
 ALTER TABLE `user_subscribers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_testimonials`
 --
 ALTER TABLE `user_testimonials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user_vcards`
 --
 ALTER TABLE `user_vcards`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `user_vcard_projects`
 --
 ALTER TABLE `user_vcard_projects`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `user_vcard_services`
 --
 ALTER TABLE `user_vcard_services`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `user_vcard_testimonials`
 --
 ALTER TABLE `user_vcard_testimonials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `user_video_sections`
 --
 ALTER TABLE `user_video_sections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
