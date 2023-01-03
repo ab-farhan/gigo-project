@@ -648,10 +648,11 @@ class FrontendController extends Controller
 
     public function adminContactMessage(Request $request)
     {
+
         $rules = [
             'name' => 'required',
             'email' => 'required|email:rfc,dns',
-            'subject' => 'required',
+            // 'subject' => 'required',
             'message' => 'required'
         ];
 
@@ -889,5 +890,4 @@ class FrontendController extends Controller
 
         return view('user-front.common.custom-page', $queryResult);
     }
-
 }

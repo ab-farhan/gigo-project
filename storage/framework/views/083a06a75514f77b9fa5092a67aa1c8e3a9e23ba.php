@@ -34,8 +34,11 @@
     <link rel="stylesheet" href="<?php echo e(asset('/assets/front/css/style.css')); ?>">
     <!-- Toastr -->
     <link rel="stylesheet" href="<?php echo e(asset('/assets/front/css/toastr.min.css')); ?>">
+    <!-- Whatsapp -->
+    <link rel="stylesheet" href="<?php echo e(asset('assets/front/css/whatsapp.min.css')); ?>">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="<?php echo e(asset('/assets/front/css/responsive.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/front/css/cookie-alert.css')); ?>">
 
 
     <?php if($rtl == 1): ?>
@@ -86,7 +89,6 @@
 
         
 
-        <!-- Page title start-->
         <div class="page-title-area bg-primary-light">
             <div class="container">
                 <div class="content text-center">
@@ -159,6 +161,8 @@
     <script src="<?php echo e(asset('/assets/front/js/lazysizes.min.js')); ?>"></script>
     <!-- Toastr JS -->
     <script src="<?php echo e(asset('assets/front/js/toastr.min.js')); ?>"></script>
+    <!-- whatsapp JS -->
+    <script src="<?php echo e(asset('assets/front/js/whatsapp.min.js')); ?>"></script>
     <!-- AOS JS -->
     <script src="<?php echo e(asset('/assets/front/js/aos.min.js')); ?>"></script>
     <!-- Main script JS -->
@@ -203,24 +207,7 @@
     </script>
 
     
-    <?php if($bs->is_whatsapp == 1): ?>
-        <script type="text/javascript">
-            "use strict";
-            var whatsapp_popup = <?php echo e($bs->whatsapp_popup); ?>;
-            var whatsappImg = "<?php echo e(asset('assets/front/img/whatsapp.svg')); ?>";
-            $(function() {
-                $('#WAButton').floatingWhatsApp({
-                    phone: "<?php echo e($bs->whatsapp_number); ?>", //WhatsApp Business phone number
-                    headerTitle: "<?php echo e($bs->whatsapp_header_title); ?>", //Popup Title
-                    popupMessage: `<?php echo !empty($bs->whatsapp_popup_message) ? nl2br($bs->whatsapp_popup_message) : ''; ?>`, //Popup Message
-                    showPopup: whatsapp_popup == 1 ? true : false, //Enables popup display
-                    buttonImage: '<img src="' + whatsappImg + '" />', //Button Image
-                    position: "right" //Position: left | right
-
-                });
-            });
-        </script>
-    <?php endif; ?>
+    
 
     <?php if($bs->is_tawkto == 1): ?>
         <?php

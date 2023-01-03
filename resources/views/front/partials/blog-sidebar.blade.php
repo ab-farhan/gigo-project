@@ -79,10 +79,11 @@
     <div class="widget widget-social-link mb-30">
         <h4 class="title">Follow Us</h4>
         <div class="social-link">
-            <a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.dribbble.com/" target="_blank"><i class="fab fa-dribbble"></i></a>
-            <a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a>
+            @foreach ($socials as $social)
+                <a href="{{ $social->url }}" target="_blank" title="Social Link"><i
+                        class="{{ $social->icon }}"></i></a>
+            @endforeach
+
         </div>
     </div>
     <div class="widget widget-categories mb-30">

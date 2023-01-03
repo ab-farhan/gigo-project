@@ -90,7 +90,7 @@ class LoginController extends Controller
             return redirect($redirectUrl);
         }
         // if unsuccessful, then redirect back to the login with the form data
-        return back()->with('err', __("Credentials Doesn\'t Match !"))->withInput();
+        return back()->with('err', __("Credentials Doesn't Match !"))->withInput();
     }
 
     public function logout()

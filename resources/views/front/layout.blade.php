@@ -60,8 +60,11 @@
     <link rel="stylesheet" href="{{ asset('/assets/front/css/style.css') }}">
     <!-- Toastr -->
     <link rel="stylesheet" href="{{ asset('/assets/front/css/toastr.min.css') }}">
+    <!-- Whatsapp -->
+    <link rel="stylesheet" href="{{ asset('assets/front/css/whatsapp.min.css') }}">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{ asset('/assets/front/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/front/css/cookie-alert.css') }}">
 
 
     @if ($rtl == 1)
@@ -132,7 +135,6 @@
             </div>
         </div> --}}
 
-        <!-- Page title start-->
         <div class="page-title-area bg-primary-light">
             <div class="container">
                 <div class="content text-center">
@@ -226,6 +228,8 @@
     <script src="{{ asset('/assets/front/js/lazysizes.min.js') }}"></script>
     <!-- Toastr JS -->
     <script src="{{ asset('assets/front/js/toastr.min.js') }}"></script>
+    <!-- whatsapp JS -->
+    <script src="{{ asset('assets/front/js/whatsapp.min.js') }}"></script>
     <!-- AOS JS -->
     <script src="{{ asset('/assets/front/js/aos.min.js') }}"></script>
     <!-- Main script JS -->
@@ -270,7 +274,7 @@
     </script>
 
     {{-- whatsapp init code --}}
-    @if ($bs->is_whatsapp == 1)
+    {{-- @if ($bs->is_whatsapp == 1)
         <script type="text/javascript">
             "use strict";
             var whatsapp_popup = {{ $bs->whatsapp_popup }};
@@ -287,7 +291,7 @@
                 });
             });
         </script>
-    @endif
+    @endif --}}
 
     @if ($bs->is_tawkto == 1)
         @php

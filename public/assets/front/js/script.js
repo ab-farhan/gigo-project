@@ -1,4 +1,4 @@
-!(function($) {
+!(function ($) {
     "use strict";
 
     /*============================================
@@ -177,13 +177,13 @@
         },
 
         on: {
-            init: function() {
+            init: function () {
                 var pagination = $('#testimonial-slider-pagination'),
                     paginationLength = $('#testimonial-slider-pagination span'),
                     currentSlide = 1,
                     totalSlide = paginationLength.length.toString().padStart(2, '0')
 
-                pagination.attr('data-min', '0'+ currentSlide);
+                pagination.attr('data-min', '0' + currentSlide);
                 pagination.attr('data-max', totalSlide);
 
                 // setSlideHeight(this);
@@ -248,13 +248,13 @@
     /*============================================
         Pricing toggle
     ============================================*/
-    $(".pricing-list").each(function(i) {
+    $(".pricing-list").each(function (i) {
         var list = $(this).children();
         if (list.length > 4) {
             this.insertAdjacentHTML('afterEnd', '<span class="show-more">Show More +</span>');
             const showLink = $(this).next(".show-more");
             list.slice(4).toggle(300);
-            showLink.on("click", function() {
+            showLink.on("click", function () {
                 list.slice(4).toggle(300);
                 showLink.html(showLink.html() === "Show Less -" ? "Show More +" : "Show Less -")
             })
@@ -262,7 +262,7 @@
     })
     // Adding active class on hover
     $('.pricing-area .item:nth-child(2) .card').addClass('active');
-    $('.pricing-area').on('mouseover', '.card', function() {
+    $('.pricing-area').on('mouseover', '.card', function () {
         $('.card.active').removeClass('active');
         $(this).addClass('active');
     });
@@ -311,7 +311,7 @@
         }
     }
 
-    
+
     /*============================================
         Footer date
     ============================================*/
@@ -323,9 +323,41 @@
         cursor()
     })
 
+    // subscribe functionality
+    if ($(".subscribeForm").length > 0) {
+
+        $(".subscribeForm").each(function () {
+            let $this = $(this);
+
+            $this.on('submit', function (e) {
+
+                e.preventDefault();
+
+                let formId = $this.attr('id');
+                let fd = new FormData(document.getElementById(formId));
+
+                $.ajax({
+                    url: $this.attr('action'),
+                    type: $this.attr('method'),
+                    data: fd,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        if ((data.errors)) {
+                            $this.find(".err-email").html(data.errors.email[0]);
+                        } else {
+                            toastr["success"]("You are subscribed successfully!");
+                            $this.trigger('reset');
+                            $this.find(".err-email").html('');
+                        }
+                    }
+                });
+            });
+        });
+    }
 })(jQuery);
 
-$(window).on("load", function() {
+$(window).on("load", function () {
     const delay = 1000;
     /*============================================
         Preloader
@@ -334,7 +366,7 @@ $(window).on("load", function() {
     /*============================================
         Aos animation
     ============================================*/
-    var aosAnimation = function() {
+    var aosAnimation = function () {
         AOS.init({
             easing: "ease",
             duration: 1200,
