@@ -17,38 +17,38 @@ class PackageController extends Controller
 {
     public function settings()
     {
-      $data['abe'] = BasicExtended::first();
-      return view('admin.packages.settings', $data);
+        $data['abe'] = BasicExtended::first();
+        return view('admin.packages.settings', $data);
     }
 
     public function updateSettings(Request $request)
     {
-      $be = BasicExtended::first();
-      $be->expiration_reminder = $request->expiration_reminder;
-      $be->save();
+        $be = BasicExtended::first();
+        $be->expiration_reminder = $request->expiration_reminder;
+        $be->save();
 
-      $request->session()->flash('success', 'Settings updated successfully!');
-      return back();
+        $request->session()->flash('success', 'Settings updated successfully!');
+        return back();
     }
     public function features()
     {
-      $be = BasicExtended::first();
-      $features = json_decode($be->package_features, true);
-      $data['features'] = $features;
-      return view('admin.packages.features', $data);
+        $be = BasicExtended::first();
+        $features = json_decode($be->package_features, true);
+        $data['features'] = $features;
+        return view('admin.packages.features', $data);
     }
 
     public function updateFeatures(Request $request)
     {
-      $features = $request->features ? json_encode($request->features) : NULL;
-      $bes = BasicExtended::all();
-      foreach ($bes as $key => $be) {
-          $be->package_features = $features;
-          $be->save();
-      }
+        $features = $request->features ? json_encode($request->features) : NULL;
+        $bes = BasicExtended::all();
+        foreach ($bes as $key => $be) {
+            $be->package_features = $features;
+            $be->save();
+        }
 
-      $request->session()->flash('success', 'Features updated successfully!');
-      return back();
+        $request->session()->flash('success', 'Features updated successfully!');
+        return back();
     }
     /**
      * Display a listing of the resource.
@@ -91,18 +91,17 @@ class PackageController extends Controller
         try {
             if (!isset($request->featured)) $request["featured"] = "0";
             $features = json_encode($request->features);
-            return DB::transaction(function () use ($request,$features) {
+            return DB::transaction(function () use ($request, $features) {
                 Package::create($request->except('features') + [
-                        'slug' => make_slug($request->title),
-                        'features' => $features,
-                    ]);
+                    'slug' => make_slug($request->title),
+                    'features' => $features,
+                ]);
                 Session::flash('success', "Package Created Successfully");
                 return "success";
             });
         } catch (\Throwable $e) {
             return $e;
         }
-
     }
 
     /**
@@ -147,22 +146,23 @@ class PackageController extends Controller
      */
     public function update(PackageUpdateRequest $request)
     {
+        // dd($request->all());
         try {
-            if(!array_key_exists('is_trial',$request->all())){
+            if (!array_key_exists('is_trial', $request->all())) {
                 $request['is_trial'] = "0";
                 $request['trial_days'] = 0;
             }
-            if(!in_array('Storage Limit',$request->features)){
+            if (!in_array('Storage Limit', $request->features)) {
                 $request['storage_limit'] = 999999;
             }
             if (!isset($request->featured)) $request["featured"] = "0";
             $features = json_encode($request->features);
-            return DB::transaction(function () use ($request,$features) {
+            return DB::transaction(function () use ($request, $features) {
                 Package::query()->findOrFail($request->package_id)
                     ->update($request->except('features') + [
-                            'slug' => make_slug($request->title),
-                            'features' => $features,
-                        ]);
+                        'slug' => make_slug($request->title),
+                        'features' => $features,
+                    ]);
                 Session::flash('success', "Package Update Successfully");
                 return "success";
             });
