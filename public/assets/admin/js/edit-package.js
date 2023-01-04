@@ -44,7 +44,6 @@
     });
     // for vCard 
     if (permission.includes("vCard")) {
-
         $("#vCard_input").show();
     } else {
         $("#vCard_input").hide();

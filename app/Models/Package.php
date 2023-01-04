@@ -19,18 +19,23 @@ class Package extends Model
         'is_trial',
         'trial_days',
         'status',
-        'storage_limit',
-        'course_categories_limit',
-        'featured_course_limit',
-        'course_limit',
-        'module_limit',
-        'lesson_limit',
+        'service_limit',
+        'service_categories_limit',
+        'service_subcategories_limit',
+        'service_orders_limit',
+        'user_limit',
+        'product_limit',
+        'product_orders_limit',
+        'post_limit',
+        'vCard_limit',
+        'language_limit',
         'features',
         'meta_keywords',
         'meta_description',
     ];
 
-    public function memberships() {
+    public function memberships()
+    {
         return $this->hasMany('App\Models\Membership');
     }
 }

@@ -140,8 +140,8 @@
                                             <span class="selectgroup-button"><?php echo e(__('Support Tickets')); ?></span>
                                         </label>
 
-                                        <label class="selectgroup-item" id="vCard">
-                                            <input type="checkbox" name="features[]" value="vCard"
+                                        <label class="selectgroup-item">
+                                            <input type="checkbox" name="features[]" value="vCard" id="vCard"
                                                 class="selectgroup-input" <?php if(is_array($permissions) && in_array('vCard', $permissions)): ?> checked <?php endif; ?>>
                                             <span class="selectgroup-button"><?php echo e(__('vCard')); ?></span>
                                         </label>
@@ -208,122 +208,119 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="service_categories"><?php echo e(__('Number Of Service Categories')); ?>*</label>
-                                    <input id="service_categories" type="number" class="form-control"
-                                        name="service_categories" placeholder="<?php echo e(__('Enter Service Categories')); ?>"
-                                        value="<?php echo e($package->service_categories); ?>">
+                                    <label for="services "><?php echo e(__('Number Of Services ')); ?>*</label>
+                                    <input id="services " type="number" class="form-control" name="service_limit"
+                                        placeholder="<?php echo e(__('Enter Services   ')); ?>"
+                                        value="<?php echo e($package->service_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errservice_categories" class="mb-0 text-danger em"></p>
+                                    <p id="errservice_limit" class="mb-0 text-danger em"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="service_categories"><?php echo e(__('Number Of Service Categories')); ?>*</label>
+                                    <input id="service_categories" type="number" class="form-control"
+                                        name="service_categories_limit"
+                                        placeholder="<?php echo e(__('Enter Service Categories')); ?>"
+                                        value="<?php echo e($package->service_categories_limit); ?>">
+                                    <p class="text-warning">
+                                        <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
+                                    </p>
+                                    <p id="errservice_categories_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label
                                         for="service_subcategories "><?php echo e(__('Number Of Service Subcategories')); ?>*</label>
                                     <input id="service_subcategories " type="number" class="form-control"
-                                        name="service_subcategories "
+                                        name="service_subcategories_limit"
                                         placeholder="<?php echo e(__('Enter Service Subcategories ')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                        value="<?php echo e($package->service_subcategories_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errservice_subcategories" class="mb-0 text-danger em"></p>
+                                    <p id="errservice_subcategories_limit" class="mb-0 text-danger em"></p>
                                 </div>
-                                <div class="form-group">
-                                    <label for="services "><?php echo e(__('Number Of Services ')); ?>*</label>
-                                    <input id="services " type="number" class="form-control" name="services "
-                                        placeholder="<?php echo e(__('Enter Services   ')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
-                                    <p class="text-warning">
-                                        <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
-                                    </p>
-                                    <p id="errservices" class="mb-0 text-danger em"></p>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label for="service_orders "><?php echo e(__('Number Of Service Orders ')); ?>*</label>
                                     <input id="service_orders " type="number" class="form-control"
-                                        name="service_orders " placeholder="<?php echo e(__('Enter Service Orders   ')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                        name="service_orders_limit" placeholder="<?php echo e(__('Enter Service Orders   ')); ?>"
+                                        value="<?php echo e($package->service_orders_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errservice_orders" class="mb-0 text-danger em"></p>
+                                    <p id="errservice_orders_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="invoices "><?php echo e(__('Number Of Invoices ')); ?>*</label>
-                                    <input id="invoices " type="number" class="form-control" name="invoices "
-                                        placeholder="<?php echo e(__('Enter Invoices')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                    <input id="invoices " type="number" class="form-control" name="invoice_limit"
+                                        placeholder="<?php echo e(__('Enter Invoices')); ?>" value="<?php echo e($package->invoice_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errinvoices" class="mb-0 text-danger em"></p>
+                                    <p id="errinvoice_limit" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="users "><?php echo e(__('Number Of Users ')); ?>*</label>
-                                    <input id="users " type="number" class="form-control" name="users "
-                                        placeholder="<?php echo e(__('Enter Users')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                    <input id="users " type="number" class="form-control" name="user_limit"
+                                        placeholder="<?php echo e(__('Enter Users')); ?>" value="<?php echo e($package->user_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errusers" class="mb-0 text-danger em"></p>
+                                    <p id="erruser_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group" id="products_input">
                                     <label for="products "><?php echo e(__('Number Of Products')); ?>*</label>
-                                    <input id="products " type="number" class="form-control" name="products"
-                                        placeholder="<?php echo e(__('Enter Products')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                    <input id="products " type="number" class="form-control" name="product_limit"
+                                        placeholder="<?php echo e(__('Enter Products')); ?>" value="<?php echo e($package->product_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errproducts" class="mb-0 text-danger em"></p>
+                                    <p id="errproduct_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group" id="product_orders_input">
                                     <label for="product_orders "><?php echo e(__('Number Of Product Orders ')); ?>*</label>
-                                    <input id="product_orders " type="number" class="form-control"
-                                        name="product_orders " placeholder="<?php echo e(__('Enter Product Orders   ')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                    <input id="product_orders_limit " type="number" class="form-control"
+                                        name="product_orders_limit" placeholder="<?php echo e(__('Enter Product Orders   ')); ?>"
+                                        value="<?php echo e($package->product_orders_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errproduct_orders" class="mb-0 text-danger em"></p>
+                                    <p id="errproduct_orders_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="posts"><?php echo e(__('Number Of Posts  ')); ?>*</label>
-                                    <input id="posts" type="number" class="form-control" name="posts"
-                                        placeholder="<?php echo e(__('Enter Posts    ')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                    <input id="posts" type="number" class="form-control" name="post_limit"
+                                        placeholder="<?php echo e(__('Enter Posts    ')); ?>" value="<?php echo e($package->post_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errposts" class="mb-0 text-danger em"></p>
+                                    <p id="errpost_limit" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group" id="vCard_input">
                                     <label for="vCards "><?php echo e(__('Number Of vCards')); ?>*</label>
-                                    <input id="vCards " type="number" class="form-control" name="vCards "
-                                        placeholder="<?php echo e(__('Enter vCards     ')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                    <input id="vCards " type="number" class="form-control" name="vCard_limit"
+                                        placeholder="<?php echo e(__('Enter vCards     ')); ?>" value="<?php echo e($package->vCard_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errvCards " class="mb-0 text-danger em"></p>
+                                    <p id="errvCard_limit" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="languages"><?php echo e(__('Number Of Languages   ')); ?>*</label>
-                                    <input id="languages" type="number" class="form-control" name="languages "
-                                        placeholder="<?php echo e(__('Enter Languages     ')); ?>"
-                                        value="<?php echo e($package->service_subcategories); ?>">
+                                    <label for="languages"><?php echo e(__('Number Of Languages')); ?>*</label>
+                                    <input id="languages" type="number" class="form-control" name="language_limit"
+                                        placeholder="<?php echo e(__('Enter Languages ')); ?>"
+                                        value="<?php echo e($package->language_limit); ?>">
                                     <p class="text-warning">
                                         <small><?php echo e(__('Enter 999999 , than it will appear as unlimited')); ?></small>
                                     </p>
-                                    <p id="errlanguages" class="mb-0 text-danger em"></p>
+                                    <p id="errlanguage_limit" class="mb-0 text-danger em"></p>
                                 </div>
                                 
 

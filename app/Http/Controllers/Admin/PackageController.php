@@ -40,7 +40,9 @@ class PackageController extends Controller
 
     public function updateFeatures(Request $request)
     {
+        // dd($request->all());
         $features = $request->features ? json_encode($request->features) : NULL;
+        // dd($features);
         $bes = BasicExtended::all();
         foreach ($bes as $key => $be) {
             $be->package_features = $features;
@@ -152,11 +154,10 @@ class PackageController extends Controller
                 $request['is_trial'] = "0";
                 $request['trial_days'] = 0;
             }
-            if (!in_array('Storage Limit', $request->features)) {
-                $request['storage_limit'] = 999999;
-            }
+
             if (!isset($request->featured)) $request["featured"] = "0";
             $features = json_encode($request->features);
+
             return DB::transaction(function () use ($request, $features) {
                 Package::query()->findOrFail($request->package_id)
                     ->update($request->except('features') + [

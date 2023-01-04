@@ -74,27 +74,46 @@
                                         <ul class="pricing-list list-unstyled p-0">
                                             <li>
                                                 <i class="fal fa-check"></i>
-                                                <?php echo e($package->course_categories_limit === 999999 ? __('Unlimited') : $package->course_categories_limit . ' '); ?><?php echo e($package->course_categories_limit === 1 ? __('Course Category') : __('Course Categories')); ?>
+                                                <?php echo e($package->service_limit === 999999 ? __('Unlimited') : $package->service_limit . ' '); ?>
+
+                                                <?php echo e($package->service_limit === 1 ? __('Service') : __('Service')); ?>
 
                                             </li>
                                             <li>
                                                 <i class="fal fa-check"></i>
-                                                <?php echo e($package->course_limit === 999999 ? __('Unlimited') : $package->course_limit . ' '); ?><?php echo e($package->course_limit === 1 ? __('Course') : __('Courses')); ?>
+                                                <?php echo e($package->service_categories_limit === 999999 ? __('Unlimited') : $package->service_categories_limit . ' '); ?><?php echo e($package->service_categories_limit === 1 ? __('Service categories') : __('Service Categories')); ?>
 
                                             </li>
                                             <li>
                                                 <i class="fal fa-check"></i>
-                                                <?php echo e($package->module_limit === 999999 ? __('Unlimited') : $package->module_limit . ' '); ?><?php echo e($package->module_limit === 1 ? __('Module') : __('Modules')); ?>
+                                                <?php echo e($package->service_subcategories_limit === 999999 ? __('Unlimited') : $package->service_subcategories_limit . ' '); ?><?php echo e($package->service_subcategories_limit === 1 ? __('Service Subcategories') : __('Service Subcategories')); ?>
 
                                             </li>
                                             <li>
                                                 <i class="fal fa-check"></i>
-                                                <?php echo e($package->lesson_limit === 999999 ? __('Unlimited') : $package->lesson_limit . ' '); ?><?php echo e($package->lesson_limit === 1 ? __('Lesson') : __('Lessons')); ?>
+                                                <?php echo e($package->service_orders_limit === 999999 ? __('Unlimited') : $package->service_orders_limit . ' '); ?><?php echo e($package->service_orders_limit === 1 ? __('Service Orders') : __('Service Orders')); ?>
 
                                             </li>
                                             <li>
                                                 <i class="fal fa-check"></i>
-                                                <?php echo e($package->featured_course_limit === 999999 ? __('Unlimited') : $package->featured_course_limit . ' '); ?><?php echo e($package->featured_course_limit === 1 ? __('Featured Course') : __('Featured Courses')); ?>
+                                                <?php echo e($package->invoice_limit === 999999 ? __('Unlimited') : $package->invoice_limit . ' '); ?><?php echo e($package->invoice_limit === 1 ? __('Invoice') : __('Invoice')); ?>
+
+                                            </li>
+                                            <li>
+                                                <i class="fal fa-check"></i>
+                                                <?php echo e($package->user_limit === 999999 ? __('Unlimited') : $package->user_limit . ' '); ?><?php echo e($package->user_limit === 1 ? __('User') : __('User')); ?>
+
+                                            </li>
+                                            
+                                            <li>
+                                                <i class="fal fa-check"></i>
+                                                <?php echo e($package->post_limit === 999999 ? __('Unlimited') : $package->post_limit . ' '); ?><?php echo e($package->post_limit === 1 ? __('Post') : __('Post')); ?>
+
+                                            </li>
+                                            
+                                            <li>
+                                                <i class="fal fa-check"></i>
+                                                <?php echo e($package->language_limit === 999999 ? __('Unlimited') : $package->language_limit . ' '); ?><?php echo e($package->language_limit === 1 ? __('Language') : __('Language')); ?>
 
                                             </li>
 
@@ -103,17 +122,11 @@
                                                     class="<?php echo e(is_array($pFeatures) && in_array($feature, $pFeatures) ? '' : 'disabled'); ?>">
                                                     <i
                                                         class="<?php echo e(is_array($pFeatures) && in_array($feature, $pFeatures) ? 'fal fa-check' : 'fal fa-times'); ?>"></i>
-                                                    <?php if($feature == 'Storage Limit'): ?>
-                                                        <?php if($package->storage_limit == 0 || $package->storage_limit == 999999): ?>
-                                                            <?php echo e(__("$feature")); ?>
+                                                    <?php if($feature == 'vCard'): ?>
+                                                        <?php echo e($package->vCard_limit === 999999 ? __('Unlimited') : $package->vCard_limit . ' '); ?>
 
-                                                        <?php elseif($package->storage_limit < 1024): ?>
-                                                            <?php echo e(__("$feature") . ' ( ' . $package->storage_limit . 'MB )'); ?>
+                                                        <?php echo e($package->vCard_limit === 1 ? __('vCard') : __('vCard')); ?>
 
-                                                        <?php else: ?>
-                                                            <?php echo e(__("$feature") . ' ( ' . ceil($package->storage_limit / 1024) . 'GB )'); ?>
-
-                                                        <?php endif; ?>
                                                     <?php else: ?>
                                                         <?php echo e(__("$feature")); ?>
 

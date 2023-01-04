@@ -147,8 +147,8 @@
                                             <span class="selectgroup-button">{{ __('Support Tickets') }}</span>
                                         </label>
 
-                                        <label class="selectgroup-item" id="vCard">
-                                            <input type="checkbox" name="features[]" value="vCard"
+                                        <label class="selectgroup-item">
+                                            <input type="checkbox" name="features[]" value="vCard" id="vCard"
                                                 class="selectgroup-input" @if (is_array($permissions) && in_array('vCard', $permissions)) checked @endif>
                                             <span class="selectgroup-button">{{ __('vCard') }}</span>
                                         </label>
@@ -237,122 +237,119 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="service_categories">{{ __('Number Of Service Categories') }}*</label>
-                                    <input id="service_categories" type="number" class="form-control"
-                                        name="service_categories" placeholder="{{ __('Enter Service Categories') }}"
-                                        value="{{ $package->service_categories }}">
+                                    <label for="services ">{{ __('Number Of Services ') }}*</label>
+                                    <input id="services " type="number" class="form-control" name="service_limit"
+                                        placeholder="{{ __('Enter Services   ') }}"
+                                        value="{{ $package->service_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errservice_categories" class="mb-0 text-danger em"></p>
+                                    <p id="errservice_limit" class="mb-0 text-danger em"></p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="service_categories">{{ __('Number Of Service Categories') }}*</label>
+                                    <input id="service_categories" type="number" class="form-control"
+                                        name="service_categories_limit"
+                                        placeholder="{{ __('Enter Service Categories') }}"
+                                        value="{{ $package->service_categories_limit }}">
+                                    <p class="text-warning">
+                                        <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
+                                    </p>
+                                    <p id="errservice_categories_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label
                                         for="service_subcategories ">{{ __('Number Of Service Subcategories') }}*</label>
                                     <input id="service_subcategories " type="number" class="form-control"
-                                        name="service_subcategories "
+                                        name="service_subcategories_limit"
                                         placeholder="{{ __('Enter Service Subcategories ') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                        value="{{ $package->service_subcategories_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errservice_subcategories" class="mb-0 text-danger em"></p>
+                                    <p id="errservice_subcategories_limit" class="mb-0 text-danger em"></p>
                                 </div>
-                                <div class="form-group">
-                                    <label for="services ">{{ __('Number Of Services ') }}*</label>
-                                    <input id="services " type="number" class="form-control" name="services "
-                                        placeholder="{{ __('Enter Services   ') }}"
-                                        value="{{ $package->service_subcategories }}">
-                                    <p class="text-warning">
-                                        <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
-                                    </p>
-                                    <p id="errservices" class="mb-0 text-danger em"></p>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label for="service_orders ">{{ __('Number Of Service Orders ') }}*</label>
                                     <input id="service_orders " type="number" class="form-control"
-                                        name="service_orders " placeholder="{{ __('Enter Service Orders   ') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                        name="service_orders_limit" placeholder="{{ __('Enter Service Orders   ') }}"
+                                        value="{{ $package->service_orders_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errservice_orders" class="mb-0 text-danger em"></p>
+                                    <p id="errservice_orders_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="invoices ">{{ __('Number Of Invoices ') }}*</label>
-                                    <input id="invoices " type="number" class="form-control" name="invoices "
-                                        placeholder="{{ __('Enter Invoices') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                    <input id="invoices " type="number" class="form-control" name="invoice_limit"
+                                        placeholder="{{ __('Enter Invoices') }}" value="{{ $package->invoice_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errinvoices" class="mb-0 text-danger em"></p>
+                                    <p id="errinvoice_limit" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="users ">{{ __('Number Of Users ') }}*</label>
-                                    <input id="users " type="number" class="form-control" name="users "
-                                        placeholder="{{ __('Enter Users') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                    <input id="users " type="number" class="form-control" name="user_limit"
+                                        placeholder="{{ __('Enter Users') }}" value="{{ $package->user_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errusers" class="mb-0 text-danger em"></p>
+                                    <p id="erruser_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group" id="products_input">
                                     <label for="products ">{{ __('Number Of Products') }}*</label>
-                                    <input id="products " type="number" class="form-control" name="products"
-                                        placeholder="{{ __('Enter Products') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                    <input id="products " type="number" class="form-control" name="product_limit"
+                                        placeholder="{{ __('Enter Products') }}" value="{{ $package->product_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errproducts" class="mb-0 text-danger em"></p>
+                                    <p id="errproduct_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group" id="product_orders_input">
                                     <label for="product_orders ">{{ __('Number Of Product Orders ') }}*</label>
-                                    <input id="product_orders " type="number" class="form-control"
-                                        name="product_orders " placeholder="{{ __('Enter Product Orders   ') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                    <input id="product_orders_limit " type="number" class="form-control"
+                                        name="product_orders_limit" placeholder="{{ __('Enter Product Orders   ') }}"
+                                        value="{{ $package->product_orders_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errproduct_orders" class="mb-0 text-danger em"></p>
+                                    <p id="errproduct_orders_limit" class="mb-0 text-danger em"></p>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="posts">{{ __('Number Of Posts  ') }}*</label>
-                                    <input id="posts" type="number" class="form-control" name="posts"
-                                        placeholder="{{ __('Enter Posts    ') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                    <input id="posts" type="number" class="form-control" name="post_limit"
+                                        placeholder="{{ __('Enter Posts    ') }}" value="{{ $package->post_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errposts" class="mb-0 text-danger em"></p>
+                                    <p id="errpost_limit" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group" id="vCard_input">
                                     <label for="vCards ">{{ __('Number Of vCards') }}*</label>
-                                    <input id="vCards " type="number" class="form-control" name="vCards "
-                                        placeholder="{{ __('Enter vCards     ') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                    <input id="vCards " type="number" class="form-control" name="vCard_limit"
+                                        placeholder="{{ __('Enter vCards     ') }}" value="{{ $package->vCard_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errvCards " class="mb-0 text-danger em"></p>
+                                    <p id="errvCard_limit" class="mb-0 text-danger em"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="languages">{{ __('Number Of Languages   ') }}*</label>
-                                    <input id="languages" type="number" class="form-control" name="languages "
-                                        placeholder="{{ __('Enter Languages     ') }}"
-                                        value="{{ $package->service_subcategories }}">
+                                    <label for="languages">{{ __('Number Of Languages') }}*</label>
+                                    <input id="languages" type="number" class="form-control" name="language_limit"
+                                        placeholder="{{ __('Enter Languages ') }}"
+                                        value="{{ $package->language_limit }}">
                                     <p class="text-warning">
                                         <small>{{ __('Enter 999999 , than it will appear as unlimited') }}</small>
                                     </p>
-                                    <p id="errlanguages" class="mb-0 text-danger em"></p>
+                                    <p id="errlanguage_limit" class="mb-0 text-danger em"></p>
                                 </div>
                                 {{-- <div class="form-group" id="storage_input">
                                     <label for="storage_limit">{{ __('Storage Limit') }}*</label>
