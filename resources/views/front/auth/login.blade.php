@@ -135,13 +135,14 @@
                                         <div class="row align-items-center">
                                             <div class="col-sm-4 col-xs-12">
                                                 <div class="link">
-                                                    <a href="{{route('user.forgot.password.form')}}">{{ __('Forgot password?') }}</a>
+                                                    <a
+                                                        href="{{ route('user.forgot.password.form') }}">{{ __('Forgot password?') }}</a>
                                                 </div>
                                             </div>
                                             <div class="col-sm-8 col-xs-12">
                                                 <div class="link go-signup">
                                                     {{ __('Not a member?') }} <a
-                                                        href="{{route('front.pricing')}}">{{ __('Sign up now') }}</a>
+                                                        href="{{ route('front.pricing') }}">{{ __('Sign up now') }}</a>
                                                 </div>
                                             </div>
                                         </div>

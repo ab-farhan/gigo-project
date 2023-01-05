@@ -99,7 +99,8 @@ unset($__errorArgs, $__bag); ?>
                                         <div class="row align-items-center">
                                             <div class="col-sm-4 col-xs-12">
                                                 <div class="link">
-                                                    <a href="<?php echo e(route('user.forgot.password.form')); ?>"><?php echo e(__('Forgot password?')); ?></a>
+                                                    <a
+                                                        href="<?php echo e(route('user.forgot.password.form')); ?>"><?php echo e(__('Forgot password?')); ?></a>
                                                 </div>
                                             </div>
                                             <div class="col-sm-8 col-xs-12">
